@@ -16,6 +16,15 @@ Arraylias (:mod:`arraylias`)
 This module contains a common interface for working with array types from
 multiple array libraries.
 
+
+Functions
+=========
+.. autosummary::
+    :toctree: ../stubs/
+
+    numpy_alias
+
+
 Classes
 =======
 
@@ -32,3 +41,4 @@ from arraylias.version import __version__
 from arraylias.alias import Alias
 from arraylias.aliased import AliasedModule, AliasedPath
 from arraylias.exceptions import LibraryError, AliasError
+from arraylias.numpy_alias import numpy_alias

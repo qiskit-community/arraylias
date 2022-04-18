@@ -8,3 +8,8 @@ sphinx-autodoc-typehints
 jupyter-sphinx
 pygments>=2.4
 reno>=3.4.0
+numpy
+scipy
+jax
+jaxlib
+tensorflow

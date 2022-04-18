@@ -6,4 +6,29 @@
 # copyright notice, and modified files need to carry a notice indicating
 # that they have been altered from the originals.
 
-from version import __version__
+"""
+============================
+Arraylias (:mod:`arraylias`)
+============================
+
+.. currentmodule:: arraylias
+
+This module contains a common interface for working with array types from
+multiple array libraries.
+
+Classes
+=======
+
+.. autosummary::
+    :toctree: ../stubs/
+
+    Alias
+    AliasedModule
+    AliasedPath
+    AliasError
+    LibraryError
+"""
+from arraylias.version import __version__
+from arraylias.alias import Alias
+from arraylias.aliased import AliasedModule, AliasedPath
+from arraylias.exceptions import LibraryError, AliasError

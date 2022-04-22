@@ -20,7 +20,7 @@ except ImportError:
     pass
 
 
-class TestJaxTransformations(unittest.TestCase):
+class TestJAXTransformations(unittest.TestCase):
     """Tests that JAX transformations perform as expected on dispatched functions."""
 
     @classmethod

@@ -286,7 +286,7 @@ class Alias:
             return self._libs_from_type(obj)
 
         libs = self._libs_from_type(type(obj))
-        if not libs and allow_sequence and isinstance(obj, (tuple, list)):
+        if not libs and allow_sequence and isinstance(obj, (tuple, list)) and obj:
             libs = self.infer_libs(obj[0])
 
         return libs
@@ -434,51 +434,19 @@ class Alias:
                 return self._defaults[path]
             raise LibraryError(f"No default function registered for {path}.")
 
-        # if Like is provided override lib
-        if libs == ("auto",):
-            return AliasedPath(self, path)
-
-        # Base path
+        # Return base library module
         if not path:
             return AliasedModule(self, lib=libs[0])
 
-        # Check if path is a registered function
+        # Auto-disaptching path
+        if libs == ("auto",):
+            return AliasedPath(self, path)
+
+        # Static dispatching for given libs and path
         for lib in libs:
-            if path in self._functions[lib]:
-                return self._functions[lib][path]
-
-            # Check if path is a registered module
-            modules = self._modules[lib]
-            if path in modules:
-                return AliasedModule(self, lib=lib, path=path)
-
-            # Since we could not match with registered functions and modules
-            # we search for path in registered modules
-            split_path = path.split(".")
-            accum_paths = [""] + [".".join(split_path[: i + 1]) for i in range(len(split_path) - 1)]
-
-            # Find deepest registered module path for given path
-            search_mods = None
-            search_path = None
-            for i, sub_path in enumerate(reversed(accum_paths)):
-                if sub_path in modules:
-                    search_mods = modules[sub_path]
-                    search_path = split_path[-1 - i :]
-                    break
-
-            # Try looking up based on sub module path
-            if search_mods:
-                for sub_mod in search_mods:
-                    try:
-                        current_path = getattr(sub_mod, search_path[0])
-                        for sub_path in search_path[1:]:
-                            current_path = getattr(current_path, sub_path)
-                        if isinstance(current_path, ModuleType):
-                            return AliasedModule(self, lib=lib, path=path)
-                        else:
-                            return current_path
-                    except AttributeError:
-                        pass
+            dispatched = self._static_dispatch(lib, path)
+            if dispatched is not None:
+                return dispatched
 
         # Check if path has a registered fallback function
         if path in self._fallbacks:
@@ -489,6 +457,48 @@ class Alias:
             f"Unable to resolve path '{path}' for array libraries '{libs}'"
             " and no fallback is registered."
         )
+
+    def _static_dispatch(self, lib: str, path: Union[str, None]) -> Optional[Callable]:
+        """Try static dispatching for given lib and path."""
+        # Check if path is a registered function for module
+        if path in self._functions[lib]:
+            return self._functions[lib][path]
+
+        # Check if path is a registered module
+        modules = self._modules[lib]
+        if path in modules:
+            return AliasedModule(self, lib=lib, path=path)
+
+        # Since we could not match with registered functions and modules
+        # we search for path in registered modules
+        split_path = path.split(".")
+        accum_paths = [""] + [".".join(split_path[: i + 1]) for i in range(len(split_path) - 1)]
+
+        # Find deepest registered module path for given path
+        search_mods = None
+        search_path = None
+        for i, sub_path in enumerate(reversed(accum_paths)):
+            if sub_path in modules:
+                search_mods = modules[sub_path]
+                search_path = split_path[-1 - i :]
+                break
+
+        # Try looking up based on sub module path
+        if search_mods:
+            for sub_mod in search_mods:
+                try:
+                    current_path = getattr(sub_mod, search_path[0])
+                    for sub_path in search_path[1:]:
+                        current_path = getattr(current_path, sub_path)
+                    if isinstance(current_path, ModuleType):
+                        return AliasedModule(self, lib=lib, path=path)
+                    else:
+                        return current_path
+                except AttributeError:
+                    pass
+
+        # Static dispatch failed to match anything for this path and library
+        return None
 
     @functools.lru_cache(None)
     def _libs_from_type(self, obj_type: type) -> Tuple[str, ...]:

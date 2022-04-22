@@ -81,3 +81,12 @@ class AliasedPath(AliasedModule):
             raise LibraryError(
                 f"{type(first_arg)} is not a registered type for any registered array libraries."
             ) from ex
+
+    def __getattr__(self, attr: str):
+        # Check to avoid dispatching for dunder methods or objects
+        # This to prevent errors that can occur when inspecting
+        # AliasedPath in wrapper methods that treat it like a function
+        # such as with jax.jit
+        if attr.startswith("__") and attr.endswith("__"):
+            raise AttributeError(f"AliasedPath cannot alias dunder attribute ({attr})")
+        return super().__getattr__(attr)

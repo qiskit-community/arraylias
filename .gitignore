@@ -129,4 +129,7 @@ dmypy.json
 .pyre/
 
 *.DS_Store
-*.stestr/
+
+# Testing and API Documentation
+.stestr/*
+docs/stubs/*

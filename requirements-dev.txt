@@ -11,3 +11,4 @@ numpy
 scipy
 jax
 jaxlib
+tensorflow; python_version<'3.11'

@@ -9,6 +9,10 @@ pygments>=2.4
 reno>=3.4.0
 numpy
 scipy
-jax
-jaxlib
+
+# JAX not on Windows
+jax; sys_platform == 'darwin' or sys_platform == 'linux'
+jaxlib; sys_platform == 'darwin' or sys_platform == 'linux'
+
+# Tensorflow does not yet have a 3.11 version
 tensorflow; python_version<'3.11'

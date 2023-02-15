@@ -44,7 +44,7 @@ class Alias:
         # Set of registered library names for dispatching
         # Note that we use a dict instead of a set so that the order backends
         # are registered will be preserved.
-        self._libs = dict()
+        self._libs = {}
 
         # Map of library types to library names for dispatching
         self._types = {}

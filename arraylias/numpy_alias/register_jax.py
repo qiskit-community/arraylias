@@ -43,8 +43,8 @@ def register_jax(alias):
             return jax.numpy.array(array, copy=True, order=order)
 
         # Register Jax linalg functions
-        alias.register_module(jax.numpy.linalg, path="linalg", lib=lib)
-        alias.register_module(jax.scipy.linalg, path="linalg", lib=lib)
+        alias.register_module(jax.numpy.linalg, lib, path="linalg")
+        alias.register_module(jax.scipy.linalg, lib, path="linalg")
 
         return True
 

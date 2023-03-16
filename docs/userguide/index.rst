@@ -92,10 +92,11 @@ kwarg of the call method.
 
 .. code-block:: python
 
-   # The following are all equivalent
-   tensordot = alias("numpy.tensordot")
+   # The following are equivalent
    tensordot = alias("tensordot", like="numpy")
-   tensordot = alias("numpy").tensordot
+
+   np = alias(like="numpy")
+   tensordot = np.tensordot
 
 The ``like`` kwarg can also be passed a type or object to infer the
 library from, for example

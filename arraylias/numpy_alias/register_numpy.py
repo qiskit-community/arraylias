@@ -51,8 +51,8 @@ def register_numpy(alias, register_numbers=True, prefer_scipy=False):
         try:
             import scipy.linalg
 
-            alias.register_module(numpy.linalg, path="linalg", lib=lib)
-            alias.register_module(scipy.linalg, path="linalg", lib=lib, prefer=prefer_scipy)
+            alias.register_module(numpy.linalg, lib, path="linalg")
+            alias.register_module(scipy.linalg, lib, path="linalg", prefer=prefer_scipy)
 
         except ModuleNotFoundError:
             pass

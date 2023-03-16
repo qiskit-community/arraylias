@@ -10,7 +10,7 @@
 
 import unittest
 import numpy
-from arraylias import Alias, AliasError
+from arraylias import Alias
 
 
 class TestRegisterFunction(unittest.TestCase):

@@ -8,7 +8,6 @@
 """Dispatcher class"""
 
 import functools
-import warnings
 from typing import Optional, Union, Callable, Tuple
 from types import ModuleType, FunctionType
 

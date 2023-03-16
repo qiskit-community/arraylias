@@ -16,12 +16,12 @@ Full library sub-module paths are supported, and libraries can be
 extended by registering custom modules, and modules can be extended by
 registering custom functions.
 
-Default NumPy Alias
-===================
+Default NumPy and SciPy Aliases
+===============================
 
 The simplest way to use Arraylias is to use the :func:`.numpy_alias`
-function to return a pre-configured :class:`.Alias` with NumPy module
-syntax.
+and :func:`scipy_alias` functions to return a pre-configured
+:class:`.Alias` with NumPy module or SciPy module syntax respectively.
 
 If the appropriate Python libraries are installed on the system
 this will include pre-registered support for the following libraries
@@ -158,6 +158,10 @@ algebra path:
 .. code-block:: python
 
    alias.register_module(scipy.linalg, "numpy", path="linalg")
+
+Note that the default :func:`.numpy_alias` does not include SciPy functions.
+There is a separate :func:`.scipy_alias` that can be used to initialize a
+SciPy alias.
 
 
 Registering Functions

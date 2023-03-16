@@ -9,8 +9,8 @@
 # pylint: disable=import-error
 
 
-def register_tensorflow(alias):
-    """Register default implementation of Tensorflow if installed.
+def register_tensorflow_numpy(alias):
+    """Register tensorflow.numpy if Tensorflow is installed.
 
     Args:
         alias (Alias): The alias dispatcher to register with.
@@ -22,16 +22,29 @@ def register_tensorflow(alias):
         import tensorflow as tf
         import tensorflow.experimental.numpy as tnp
 
-        lib = "tensorflow"
+        alias.register_type(tf.Tensor, "tensorflow")
+        alias.register_module(tnp, "tensorflow")
 
-        # Register Tensor type
-        alias.register_type(tf.Tensor, lib)
+        return True
 
-        # Register Tensorflow modules with preference given to the
-        # numpy module
-        alias.register_module(tnp, lib)
-        alias.register_module(tf, lib)
-        alias.register_module(tf.math, lib)
+    except ModuleNotFoundError:
+        return False
+
+
+def register_tensorflow_scipy(alias):
+    """Register tensorflow.scipy.linalg if Tensorflow is installed.
+
+    Args:
+        alias (Alias): The alias dispatcher to register with.
+
+    Returns:
+        bool: True if tensorflow is installed and was successfully registered.
+    """
+    try:
+        import tensorflow as tf
+
+        alias.register_type(tf.Tensor, "tensorflow")
+        alias.register_module(tf.linalg, lib="tensorflow", path="linalg")
 
         return True
 

@@ -9,11 +9,11 @@
 
 from arraylias.alias import Alias
 from .register_numpy import register_numpy
-from .register_jax import register_jax
-from .register_tensorflow import register_tensorflow
+from .register_jax import register_jax_numpy
+from .register_tensorflow import register_tensorflow_numpy
 
 
-def numpy_alias(register_numbers=True, prefer_scipy=False) -> Alias:
+def numpy_alias(register_numbers=True) -> Alias:
     """Return a pre-configured Alias with numpy like syntax.
 
     This includes registered libs ``numpy``, ``jax``, and ``tensorflow``
@@ -21,23 +21,14 @@ def numpy_alias(register_numbers=True, prefer_scipy=False) -> Alias:
 
     Args:
         register_numbers (bool): If True register python scalar number types
-                                 int, float, and complex as numpy array types
-                                 for aliasing (Default: True).
-        prefer_scipy (bool): If set to True the SciPy linear algebra module will
-                             be preferred over the NumPy linear algebra module
-                             for aliased functions in both modules. If False SciPy
-                             will only be used for functions not in NumPy.
-                             (Default: False).
+            int, float, and complex as numpy array types for aliasing
+            (Default: True).
 
     Returns:
         A numpy-syntax :class:`.Alias`.
     """
     alias = Alias()
-    register_numpy(
-        alias,
-        register_numbers=register_numbers,
-        prefer_scipy=prefer_scipy,
-    )
-    register_jax(alias)
-    register_tensorflow(alias)
+    register_numpy(alias, register_numbers=register_numbers)
+    register_jax_numpy(alias)
+    register_tensorflow_numpy(alias)
     return alias

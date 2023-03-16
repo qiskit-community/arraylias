@@ -23,6 +23,7 @@ Functions
     :toctree: ../stubs/
 
     numpy_alias
+    scipy_alias
 
 
 Classes
@@ -41,4 +42,4 @@ from arraylias.version import __version__
 from arraylias.alias import Alias
 from arraylias.aliased import AliasedModule, AliasedPath
 from arraylias.exceptions import LibraryError, AliasError
-from arraylias.numpy_alias import numpy_alias
+from arraylias.default_alias import numpy_alias, scipy_alias

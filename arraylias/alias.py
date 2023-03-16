@@ -16,6 +16,61 @@ from arraylias.aliased import AliasedModule, AliasedPath
 from arraylias.exceptions import AliasError, LibraryError
 
 
+@functools.wraps(functools.lru_cache)
+def method_lru_cache(maxsize: Optional[int] = 128, typed: bool = False) -> Callable:
+    """Least-recently-used cache decorator for methods.
+
+    If *maxsize* is set to None, the LRU features are disabled and the cache
+    can grow without bound.
+
+    If *typed* is True, arguments of different types will be cached separately.
+    For example, f(3.0) and f(3) will be treated as distinct calls with
+    distinct results.
+
+    Arguments to the cached function must be hashable.
+
+    See:  https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)
+    """
+
+    # Construct the functools LRU cache decorator
+    lru_cache = functools.lru_cache(maxsize=maxsize, typed=typed)
+
+    def cache_method_decorator(method: Callable) -> Callable:
+        """Decorator for caching method.
+
+        Args:
+            method: A method to cache.
+
+        Returns:
+            The wrapped cached method.
+        """
+
+        def _get_cache(self):
+            """Retrieve the cache"""
+            try:
+                return getattr(self, "_method_lru_cache")
+            except AttributeError:
+                setattr(self, "_method_lru_cache", {})
+                return getattr(self, "_method_lru_cache")
+
+        @functools.wraps(method)
+        def _cached_method(self, *args, **kwargs):
+            cache = _get_cache(self)
+            key = method.__name__
+            try:
+                # Return the previously cached function
+                meth = cache[key]
+            except KeyError:
+                # Create new cached function and return it
+                meth = cache[key] = lru_cache(functools.partial(method, self))
+
+            return meth(*args, **kwargs)
+
+        return _cached_method
+
+    return cache_method_decorator
+
+
 class Alias:
     """Array library aliasing class.
 
@@ -38,6 +93,7 @@ class Alias:
         "_functions",
         "_fallbacks",
         "_defaults",
+        "_method_lru_cache",
     ]
 
     def __init__(self):
@@ -64,6 +120,9 @@ class Alias:
         # function can't match the array type to a registered type
         self._defaults = {}
 
+        # Cache for LRU cached methods
+        self._method_lru_cache = {}
+
     def __call__(
         self, path: Optional[str] = None, like: Optional[Union[str, type, any]] = None
     ) -> Union[AliasedModule, AliasedPath, Callable]:
@@ -89,12 +148,12 @@ class Alias:
             libs = (lib,)
         return self._dispatch(libs, path)
 
-    @functools.lru_cache(1)
+    @method_lru_cache(1)
     def registered_libs(self) -> Tuple[str, ...]:
         """Return all registered library names for dispatching."""
         return tuple(self._libs)
 
-    @functools.lru_cache(1)
+    @method_lru_cache(1)
     def registered_types(self) -> Tuple[type, ...]:
         """Return all registered types for dispatching."""
         return tuple(self._types)
@@ -294,11 +353,9 @@ class Alias:
     def cache_clear(self):
         """Clear cached dispatched calls."""
         # Clear LRU cached functions
-        self.registered_libs.cache_clear()
-        self.registered_types.cache_clear()
-        self._dispatch.cache_clear()
-        self._split_lib_from_path.cache_clear()
-        self._libs_from_type.cache_clear()
+        for func in self._method_lru_cache.values():
+            func.cache_clear()
+        self._method_lru_cache.clear()
 
     def _register_lib(self, lib: str):
         """Register an array library name.
@@ -423,7 +480,7 @@ class Alias:
 
         return decorator
 
-    @functools.lru_cache(None)
+    @method_lru_cache(512)
     def _dispatch(
         self, libs: Tuple[str, ...], path: Union[str, None]
     ) -> Union[AliasedModule, AliasedPath, Callable]:
@@ -500,7 +557,7 @@ class Alias:
         # Static dispatch failed to match anything for this path and library
         return None
 
-    @functools.lru_cache(None)
+    @method_lru_cache()
     def _libs_from_type(self, obj_type: type) -> Tuple[str, ...]:
         """Return the library name of a type if registered"""
         if obj_type is type(None):
@@ -516,7 +573,7 @@ class Alias:
 
         return tuple()
 
-    @functools.lru_cache(None)
+    @method_lru_cache()
     def _split_lib_from_path(self, path: Union[str, None]) -> Tuple[str, str]:
         """Split lib from path string if present."""
         if path is None:
@@ -531,7 +588,7 @@ class Alias:
         return "auto", path
 
 
-@functools.lru_cache(None)
+@functools.lru_cache()
 def _lib_from_object(obj: any) -> str:
     """Infer array library string from base module path of an object."""
     if isinstance(obj, ModuleType):

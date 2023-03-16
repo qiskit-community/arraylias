@@ -18,6 +18,19 @@ from arraylias.exceptions import AliasError, LibraryError
 
 @functools.wraps(functools.lru_cache)
 def method_lru_cache(maxsize: Optional[int] = 128, typed: bool = False) -> Callable:
+    """Least-recently-used cache decorator for methods.
+
+    If *maxsize* is set to None, the LRU features are disabled and the cache
+    can grow without bound.
+
+    If *typed* is True, arguments of different types will be cached separately.
+    For example, f(3.0) and f(3) will be treated as distinct calls with
+    distinct results.
+
+    Arguments to the cached function must be hashable.
+
+    See:  https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)
+    """
 
     # Construct the functools LRU cache decorator
     lru_cache = functools.lru_cache(maxsize=maxsize, typed=typed)
@@ -32,9 +45,17 @@ def method_lru_cache(maxsize: Optional[int] = 128, typed: bool = False) -> Calla
             The wrapped cached method.
         """
 
+        def _get_cache(self):
+            """Retrieve the cache"""
+            try:
+                return getattr(self, "_method_lru_cache")
+            except AttributeError:
+                setattr(self, "_method_lru_cache", {})
+                return getattr(self, "_method_lru_cache")
+
         @functools.wraps(method)
         def _cached_method(self, *args, **kwargs):
-            cache = self._method_lru_cache
+            cache = _get_cache(self)
             key = method.__name__
             try:
                 # Return the previously cached function
@@ -43,8 +64,6 @@ def method_lru_cache(maxsize: Optional[int] = 128, typed: bool = False) -> Calla
                 # Create new cached function and return it
                 meth = cache[key] = lru_cache(functools.partial(method, self))
 
-            # Add cache clear method to class instance
-            #self.cache_clear = cache_clear
             return meth(*args, **kwargs)
 
         return _cached_method
@@ -74,14 +93,14 @@ class Alias:
         "_functions",
         "_fallbacks",
         "_defaults",
-        "_method_lru_cache"
+        "_method_lru_cache",
     ]
 
     def __init__(self):
         # Set of registered library names for dispatching
         # Note that we use a dict instead of a set so that the order backends
         # are registered will be preserved.
-        self._libs = dict()
+        self._libs = {}
 
         # Map of library types to library names for dispatching
         self._types = {}

@@ -26,7 +26,7 @@ def register_jax(alias):
         lib = "jax"
 
         # pylint: disable = invalid-name
-        JAX_TYPES = (DeviceArray, Tracer)
+        JAX_TYPES = (DeviceArray, Tracer, jax.Array)
 
         # Register jax types
         for atype in JAX_TYPES:

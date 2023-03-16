@@ -62,6 +62,14 @@ class TestRegisterFunction(unittest.TestCase):
         func = alias("custom.path.sin", like=numpy.ndarray)
         self.assertEqual(func, numpy.sin)
 
+    def test_register_module_same_path_and_lib(self):
+        """Test register_module method with path and lib"""
+        alias = Alias()
+        alias.register_type(numpy.ndarray)
+        alias.register_module(numpy, path="numpy")
+        func = alias("numpy.sin", like=numpy.ndarray)
+        self.assertEqual(func, numpy.sin)
+
     def test_register_module_flatten(self):
         """Test using register_module to flatten modules"""
         alias = Alias()

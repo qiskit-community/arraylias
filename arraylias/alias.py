@@ -131,9 +131,9 @@ class Alias:
         """Return aliased library path.
 
         Args:
-            path: A function or module path to alias. If None the base module
+            path: A function or module path to alias. If ``None`` the base module
                   will be returned.
-            like: infer library based on type or object and statically dispatch to
+            like: Infer library based on type or object and statically dispatch to
                   that libraries function or module.
 
         Returns:
@@ -175,9 +175,9 @@ class Alias:
             func: The function to dispatch to for the specified array library.
                 If None this will return a decorator to apply to a function.
             lib: Optional, a name string to identify the array library.
-                 If None this will be set as the base module name of the
+                 If ``None`` this will be set as the base module name of the
                  arrays module.
-            path: Optional, the path for dispatching to this function. If None
+            path: Optional, the path for dispatching to this function. If ``None``
                   the name of the input function will be used.
 
         Returns:
@@ -252,12 +252,12 @@ class Alias:
             module: A module, namespace, or class to look for attributes
                     corresponding to the dispatched function name.
             lib: Optional, a name string to identify the array library.
-                 If None this will be set as the base module name of the
+                 If ``None`` this will be set as the base module name of the
                  arrays module.
             path: Optional, the path for the module. If empty this module
                   will be added to the base path for the library.
-            prefer: prioritize searching this module before previously
-                    registered modules for the current path (Default: False).
+            prefer: Prioritize searching this module before previously
+                    registered modules for the current path (Default: ``False``).
 
         .. note::
 
@@ -388,7 +388,7 @@ class Alias:
             lib: Optional, the name string to identify the array library.
                  If None the base function module will be used.
             path: Optional, the aliased path for this function.
-                  If None the function name will be used.
+                  If ``None`` the function name will be used.
 
         Returns:
             A function decorator to register a function if dispatched_function
@@ -480,7 +480,7 @@ class Alias:
         if not path:
             return AliasedModule(self, lib=libs[0])
 
-        # Auto-disaptching path
+        # Auto-dispatching path
         if libs == _AUTOLIB:
             return AliasedPath(self, path)
 

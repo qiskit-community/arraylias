@@ -44,7 +44,7 @@ def register_jax_numpy(alias):
         alias (Alias): The alias dispatcher to register with.
 
     Returns:
-        bool: True if jax is installed and was successfully registered.
+        bool: ``True`` if JAX is installed and was successfully registered, otherwise ``False``.
     """
     if register_jax_types(alias):
         import jax
@@ -74,7 +74,7 @@ def register_jax_scipy(alias):
         alias (Alias): The alias dispatcher to register with.
 
     Returns:
-        bool: True if jax is installed and was successfully registered.
+        bool: ``True`` if JAX is installed and was successfully registered, otherwise ``False``.
     """
     if register_jax_types(alias):
         import jax

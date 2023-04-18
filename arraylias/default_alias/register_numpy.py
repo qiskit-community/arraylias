@@ -14,12 +14,12 @@ def register_numpy_types(alias, register_numbers=True):
 
     Args:
         alias (Alias): The alias dispatcher to register with.
-        register_numbers (bool): If True register python scalar number types
-            int, float, and complex as numpy array types for aliasing
-            (Default: True).
+        register_numbers (bool): If ``True`` register python scalar number types
+            ``int``, ``float``, and ``complex`` as ``numpy`` array types for aliasing
+            (Default: ``True``).
 
     Returns:
-        bool: True if Numpy is installed and was successfully registered.
+        bool: ``True`` if NumPy is installed and was successfully registered.
     """
     try:
         import numpy
@@ -43,16 +43,16 @@ def register_numpy_types(alias, register_numbers=True):
 
 
 def register_numpy(alias, register_numbers=True):
-    """Register default implementation of numpy and scipy if installed.
+    """Register default implementation of NumPy and SciPy if installed.
 
     Args:
         alias (Alias): The alias dispatcher to register with.
-        register_numbers (bool): If True register python scalar number types
-            int, float, and complex as numpy array types for aliasing
-            (Default: True).
+        register_numbers (bool): If ``True`` register python scalar number types
+            ``int``, ``float``, and ``complex`` as ``numpy`` array types for aliasing
+            (Default: ``True``).
 
     Returns:
-        bool: True if numpy is installed and was successfully registered.
+        bool: ``True`` if ``numpy`` is installed and was successfully registered, otherwise ``False``.
     """
     if register_numpy_types(alias, register_numbers):
         import numpy
@@ -70,16 +70,16 @@ def register_numpy(alias, register_numbers=True):
 
 
 def register_scipy(alias, register_numbers=True):
-    """Register default implementation of numpy and scipy if installed.
+    """Register default implementation of NumPy and SciPy if installed.
 
     Args:
         alias (Alias): The alias dispatcher to register with.
-        register_numbers (bool): If True register python scalar number types
-            int, float, and complex as numpy array types for aliasing
-            (Default: True).
+        register_numbers (bool): If ``True`` register python scalar number types
+            ``int``, ``float``, and ``complex`` as NumPy array types for aliasing
+            (Default: ``True``).
 
     Returns:
-        bool: True if numpy is installed and was successfully registered.
+        bool: ``True`` if SciPy is installed and was successfully registered, otherwise ``False``.
     """
     if register_numpy_types(alias, register_numbers):
         try:

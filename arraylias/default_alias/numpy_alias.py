@@ -20,8 +20,8 @@ def numpy_alias(register_numbers=True) -> Alias:
     if the respective packages are installed.
 
     Args:
-        register_numbers (bool): If True register python scalar number types
-            int, float, and complex as numpy array types for aliasing
+        register_numbers (bool): If ``True`` register python scalar number types
+            ``int``, ``float``, and ``complex`` as NumPy array types for aliasing
             (Default: True).
 
     Returns:

@@ -42,7 +42,7 @@ class TestRegisterFunction(unittest.TestCase):
 
         alias = Alias()
         alias.register_type(numpy.ndarray)
-        alias.register_module(numpy, path="numpy.custom.path")
+        alias.register_module(numpy, path="custom.path")
         func = alias("custom.path.sin", like=numpy.ndarray)
         self.assertEqual(func, numpy.sin)
 
@@ -54,28 +54,21 @@ class TestRegisterFunction(unittest.TestCase):
         func = alias("sin", like=numpy.ndarray)
         self.assertEqual(func, numpy.sin)
 
-    def test_register_module_path_lib(self):
-        """Test register_module method with path"""
-        alias = Alias()
-        alias.register_type(numpy.ndarray, "test_lib")
-        alias.register_module(numpy, path="test_lib.custom.path")
-        func = alias("custom.path.sin", like=numpy.ndarray)
-        self.assertEqual(func, numpy.sin)
-
     def test_register_module_path_and_lib(self):
         """Test register_module method with path and lib"""
         alias = Alias()
         alias.register_type(numpy.ndarray, "test_lib")
-        alias.register_module(numpy, path="custom.path", lib="test_lib")
+        alias.register_module(numpy, lib="test_lib", path="custom.path")
         func = alias("custom.path.sin", like=numpy.ndarray)
         self.assertEqual(func, numpy.sin)
 
-    def test_register_module_path_and_lib_warning(self):
+    def test_register_module_same_path_and_lib(self):
         """Test register_module method with path and lib"""
         alias = Alias()
-        alias.register_type(numpy.ndarray, "test_lib")
-        with self.assertWarns(UserWarning):
-            alias.register_module(numpy, path="test_lib.custom.path", lib="test_lib")
+        alias.register_type(numpy.ndarray)
+        alias.register_module(numpy, path="numpy")
+        func = alias("numpy.sin", like=numpy.ndarray)
+        self.assertEqual(func, numpy.sin)
 
     def test_register_module_flatten(self):
         """Test using register_module to flatten modules"""

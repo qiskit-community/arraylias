@@ -8,12 +8,14 @@
 """Dispatcher class"""
 
 import functools
-import warnings
 from typing import Optional, Union, Callable, Tuple
 from types import ModuleType, FunctionType
 
 from arraylias.aliased import AliasedModule, AliasedPath
 from arraylias.exceptions import AliasError, LibraryError
+
+
+_AUTOLIB = ("auto",)
 
 
 @functools.wraps(functools.lru_cache)
@@ -129,23 +131,22 @@ class Alias:
         """Return aliased library path.
 
         Args:
-            path: A library path to alias.
-            like: infer lib based on type or object.
+            path: A function or module path to alias. If ``None`` the base module
+                  will be returned.
+            like: Infer library based on type or object and statically dispatch to
+                  that libraries function or module.
 
         Returns:
-            The aliased library, module, or function.
+            The aliased module or function.
 
         Raises:
             ValueError: if a specific array library is specified in both path
                         and the like kwarg is used.
         """
-        lib, path = self._split_lib_from_path(path)
         if like is not None:
-            if lib != "auto":
-                raise ValueError("like kwarg should not be used with a resolved library path.")
             libs = self.infer_libs(like)
         else:
-            libs = (lib,)
+            libs = _AUTOLIB
         return self._dispatch(libs, path)
 
     @method_lru_cache(1)
@@ -161,8 +162,8 @@ class Alias:
     def register_function(
         self,
         func: Optional[Callable] = None,
-        path: Optional[str] = None,
         lib: Optional[str] = None,
+        path: Optional[str] = None,
     ) -> Optional[Callable]:
         """Register an array function for aliasing.
 
@@ -173,17 +174,17 @@ class Alias:
         Args:
             func: The function to dispatch to for the specified array library.
                 If None this will return a decorator to apply to a function.
-            path: Optional, the path for dispatching to this function. If None
-                  the name of the input function will be used.
             lib: Optional, a name string to identify the array library.
-                 If None this will be set as the base module name of the
+                 If ``None`` this will be set as the base module name of the
                  arrays module.
+            path: Optional, the path for dispatching to this function. If ``None``
+                  the name of the input function will be used.
 
         Returns:
             If func is None returns a decorator for registering a function.
             Otherwise returns None.
         """
-        decorator = self._register_function_decorator(path=path, lib=lib)
+        decorator = self._register_function_decorator(lib=lib, path=path)
         if func is None:
             return decorator
         return decorator(func)
@@ -241,8 +242,8 @@ class Alias:
     def register_module(
         self,
         module: ModuleType,
-        path: Optional[str] = None,
         lib: Optional[str] = None,
+        path: Optional[str] = None,
         prefer: bool = False,
     ):
         """Register a module for looking up array functions.
@@ -250,13 +251,13 @@ class Alias:
         Args:
             module: A module, namespace, or class to look for attributes
                     corresponding to the dispatched function name.
+            lib: Optional, a name string to identify the array library.
+                 If ``None`` this will be set as the base module name of the
+                 arrays module.
             path: Optional, the path for the module. If empty this module
                   will be added to the base path for the library.
-            lib: Optional, a name string to identify the array library.
-                 If None this will be set as the base module name of the
-                 arrays module.
-            prefer: prioritize searching this module before previously
-                    registered modules for the current path (Default: False).
+            prefer: Prioritize searching this module before previously
+                    registered modules for the current path (Default: ``False``).
 
         .. note::
 
@@ -265,18 +266,9 @@ class Alias:
             module being returned.
         """
         # Infer default lib from module name or path prefix
-        path_lib, path = self._split_lib_from_path(path)
         if lib is None:
-            if path_lib != "auto":
-                lib = path_lib
-            else:
-                lib = _lib_from_object(module)
-        elif path_lib != "auto":
-            warnings.warn(
-                "Module lib is specified in both lib and path kwargs, "
-                f"using lib kwarg value {lib} and path value {path}",
-                UserWarning,
-            )
+            lib = _lib_from_object(module)
+        path = path or ""
 
         # Register library and paths
         self._register_lib(lib)
@@ -388,15 +380,15 @@ class Alias:
                 mods[sub_path] = []
 
     def _register_function_decorator(
-        self, path: Optional[str] = None, lib: Optional[str] = None
+        self, lib: Optional[str] = None, path: Optional[str] = None
     ) -> Callable:
         """Return a decorator to register a function.
 
         Args:
-            path: Optional, the aliased path for this function.
-                  If None the function name will be used.
             lib: Optional, the name string to identify the array library.
                  If None the base function module will be used.
+            path: Optional, the aliased path for this function.
+                  If ``None`` the function name will be used.
 
         Returns:
             A function decorator to register a function if dispatched_function
@@ -404,20 +396,17 @@ class Alias:
         """
 
         def decorator(func):
-            func_path = path if path else func.__name__
-            func_lib, func_path = self._split_lib_from_path(func_path)
-            if lib:
-                if func_lib != "auto":
-                    warnings.warn(
-                        "Function lib is specified in both lib and path kwargs, "
-                        f"using lib kwarg value {lib} and path value {func_path}",
-                        UserWarning,
-                    )
-                func_lib = lib
-            elif func_lib == "auto":
+            if lib is None:
                 func_lib = _lib_from_object(func)
+            else:
+                func_lib = lib
             if func_lib not in self._libs:
                 raise LibraryError(f"Array library {func_lib} is not a registered library.")
+
+            if path is None:
+                func_path = self._trim_lib_from_path(func.__name__)
+            else:
+                func_path = path
 
             # Register sub paths if this is a module function
             split_path = func_path.rsplit(".", 1)
@@ -443,12 +432,10 @@ class Alias:
         """
 
         def decorator(func):
-            func_path = path if path else func.__name__
-            func_lib, func_path = self._split_lib_from_path(func_path)
-            if func_lib != "auto":
-                raise AliasError(
-                    f"Fallback function path {path} should not contain a registered lib {func_lib}"
-                )
+            if path is None:
+                func_path = self._trim_lib_from_path(func.__name__)
+            else:
+                func_path = path
             self._fallbacks[func_path] = func
             self.cache_clear()
             return func
@@ -468,12 +455,10 @@ class Alias:
         """
 
         def decorator(func):
-            func_path = path if path else func.__name__
-            func_lib, func_path = self._split_lib_from_path(func_path)
-            if func_lib != "auto":
-                raise AliasError(
-                    f"Default function path {path} should not contain a registered lib {func_lib}"
-                )
+            if path is None:
+                func_path = self._trim_lib_from_path(func.__name__)
+            else:
+                func_path = path
             self._defaults[func_path] = func
             self.cache_clear()
             return func
@@ -495,8 +480,8 @@ class Alias:
         if not path:
             return AliasedModule(self, lib=libs[0])
 
-        # Auto-disaptching path
-        if libs == ("auto",):
+        # Auto-dispatching path
+        if libs == _AUTOLIB:
             return AliasedPath(self, path)
 
         # Static dispatching for given libs and path
@@ -574,18 +559,17 @@ class Alias:
         return tuple()
 
     @method_lru_cache()
-    def _split_lib_from_path(self, path: Union[str, None]) -> Tuple[str, str]:
+    def _trim_lib_from_path(self, path: Optional[str]) -> str:
         """Split lib from path string if present."""
         if path is None:
-            return "auto", ""
+            return ""
 
         split = path.split(".", 1)
         if split[0] in self._libs:
-            lib = split[0]
             tail = "" if len(split) == 1 else split[1]
-            return lib, tail
+            return tail
 
-        return "auto", path
+        return path
 
 
 @functools.lru_cache()

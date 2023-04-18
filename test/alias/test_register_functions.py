@@ -10,7 +10,7 @@
 
 import unittest
 import numpy
-from arraylias import Alias, AliasError
+from arraylias import Alias
 
 
 class TestRegisterFunction(unittest.TestCase):
@@ -54,19 +54,9 @@ class TestRegisterFunction(unittest.TestCase):
 
         alias = Alias()
         alias.register_type(numpy.ndarray, "test_lib")
-        alias.register_function(numpy.sin, path="test_lib.some.path.sin")
+        alias.register_function(numpy.sin, lib="test_lib", path="some.path.sin")
         func = alias("some.path.sin", like="test_lib")
         self.assertEqual(func, numpy.sin)
-
-    def test_register_function_lib_path_warning(self):
-        """Test register_function with custom name and lib"""
-        alias = Alias()
-        alias.register_type(numpy.ndarray, "test_lib")
-
-        with self.assertWarns(UserWarning):
-            alias.register_function(numpy.sin, path="test_lib.sin", lib="test_lib")
-            func = alias("sin", like="test_lib")
-            self.assertEqual(func, numpy.sin)
 
     def test_register_function_custom(self):
         """Test register_function"""
@@ -158,14 +148,6 @@ class TestRegisterFunction(unittest.TestCase):
         func = alias("some.module.path.sin", like="test_lib")
         self.assertEqual(func, numpy.sin)
 
-    def test_register_fallback_invalid_path(self):
-        """Test register_fallback with invalid path"""
-
-        alias = Alias()
-        alias.register_type(numpy.ndarray, "numpy")
-        with self.assertRaises(AliasError):
-            alias.register_fallback(numpy.sin, path="numpy.sin")
-
     def test_register_fallback_custom(self):
         """Test register_fallback"""
         alias = Alias()
@@ -240,14 +222,6 @@ class TestRegisterFunction(unittest.TestCase):
         alias.register_default(numpy.sin, path="some.module.path.sin")
         func = alias("some.module.path.sin", like="test_lib")
         self.assertEqual(func, numpy.sin)
-
-    def test_register_default_invalid_path(self):
-        """Test register_default with custom name and lib"""
-
-        alias = Alias()
-        alias.register_type(numpy.ndarray, "numpy")
-        with self.assertRaises(AliasError):
-            alias.register_default(numpy.sin, path="numpy.sin")
 
     def test_register_default_custom(self):
         """Test register_default"""

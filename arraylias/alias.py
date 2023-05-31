@@ -163,6 +163,7 @@ class Alias:
         func: Optional[Callable] = None,
         path: Optional[str] = None,
         lib: Optional[str] = None,
+        identity: bool = False,
     ) -> Optional[Callable]:
         """Register an array function for aliasing.
 
@@ -178,12 +179,18 @@ class Alias:
             lib: Optional, a name string to identify the array library.
                  If None this will be set as the base module name of the
                  arrays module.
+            identity: If identity is True, the function that returns inputs themselves
+                 as outputs is registered.
 
         Returns:
             If func is None returns a decorator for registering a function.
             Otherwise returns None.
         """
         decorator = self._register_function_decorator(path=path, lib=lib)
+
+        if identity:
+            func = lambda *x: x[0] if len(x) == 1 else x
+
         if func is None:
             return decorator
         return decorator(func)
@@ -192,6 +199,7 @@ class Alias:
         self,
         func: Optional[Callable] = None,
         path: Optional[str] = None,
+        identity: bool = False,
     ) -> Optional[Callable]:
         """Register a fallback array function for aliasing.
 
@@ -203,12 +211,18 @@ class Alias:
                   If None this will return a decorator to apply to a function.
             path: Optional, the path for dispatching to this function. If None
                   the name of the input function will be used.
+            identity: If identity is True, the function that returns inputs themselves
+                 as outputs is registered as a fallback.
 
         Returns:
             If func is None returns a decorator for registering a function.
             Otherwise returns None.
         """
         decorator = self._register_fallback_decorator(path=path)
+
+        if identity:
+            func = lambda *x: x[0] if len(x) == 1 else x
+
         if func is None:
             return decorator
         return decorator(func)
@@ -217,6 +231,7 @@ class Alias:
         self,
         func: Optional[Callable] = None,
         path: Optional[str] = None,
+        identity: bool = False,
     ) -> Optional[Callable]:
         """Register a default function alias for un-registered types.
 
@@ -228,12 +243,17 @@ class Alias:
                   If None this will return a decorator to apply to a function.
             path: Optional, the path for dispatching to this function. If None
                   the name of the input function will be used.
-
+            identity: If identity is True, the function that returns inputs themselves
+                 as outputs is registered as a default.
         Returns:
             If func is None returns a decorator for registering a function.
             Otherwise returns None.
         """
         decorator = self._register_default_decorator(path=path)
+
+        if identity:
+            func = lambda *x: x[0] if len(x) == 1 else x
+
         if func is None:
             return decorator
         return decorator(func)

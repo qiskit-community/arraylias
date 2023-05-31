@@ -131,6 +131,17 @@ class TestRegisterFunction(unittest.TestCase):
         func = alias("myfunc", like=lib)
         self.assertEqual(func, myfunc)
 
+    def test_register_function_with_identity(self):
+        """Test register_fucntion with identity"""
+        alias = Alias()
+        alias.register_type(numpy.ndarray, "test_lib")
+
+        alias.register_function(path="supermyfunc", lib="test_lib", identity=True)
+        func = alias("supermyfunc", like="test_lib")
+
+        self.assertEqual(func(1), 1)
+        self.assertEqual(func(1, 2), (1, 2))
+
     def test_register_fallback_default(self):
         """Test register_fallback with default args"""
 
@@ -217,6 +228,17 @@ class TestRegisterFunction(unittest.TestCase):
         func = alias("myfunc", like=lib)
         self.assertEqual(func, myfunc)
 
+    def test_register_fallback_with_identity(self):
+        """Test register_fallback with identity"""
+        alias = Alias()
+        alias.register_type(numpy.ndarray)
+
+        alias.register_fallback(path="myfunc", identity=True)
+        func = alias("myfunc", like=numpy.ndarray)
+
+        self.assertEqual(func(1), 1)
+        self.assertEqual(func(1, 2), (1, 2))
+
     def test_register_default_default(self):
         """Test register_default with default args"""
 
@@ -293,3 +315,13 @@ class TestRegisterFunction(unittest.TestCase):
 
         func = alias("myfunc", like=numpy.ndarray)
         self.assertEqual(func, myfunc)
+
+    def test_register_default_with_identity(self):
+        """Test register_default with identity"""
+        alias = Alias()
+
+        alias.register_default(path="myfunc", identity=True)
+        func = alias("myfunc", like=numpy.ndarray)
+
+        self.assertEqual(func(1), 1)
+        self.assertEqual(func(1, 2), (1, 2))

@@ -21,6 +21,7 @@ def register_jax(alias):
     try:
         import jax
         from jax.interpreters.xla import DeviceArray
+        from jax.random import PRNGKey, split, uniform, normal
         from jax.core import Tracer
 
         lib = "jax"
@@ -41,6 +42,34 @@ def register_jax(alias):
         @alias.register_function(lib=lib)
         def copy(array, order="K"):
             return jax.numpy.array(array, copy=True, order=order)
+
+        # JAX provides a jax.random module, so we add custom functions
+        # which is similar with numpy.random module
+        @alias.register_function(lib=lib)
+        def random_seed(seed=None):
+            global _RANDOM_KEY
+            if seed is None:
+                import random
+
+                seed = random.randint(-(2**63), 2**63 - 1)
+            _RANDOM_KEY = PRNGKey(seed)
+
+        def random_key():
+            if _RANDOM_KEY is None:
+                random_seed()
+            return split(_RANDOM_KEY)[0]
+
+        @alias.register_function(lib=lib)
+        def random_normal(loc=0.0, scale=1.0, size=None):
+            if size is None:
+                size = ()
+            return normal(random_key(), shape=size) * scale + loc
+
+        @alias.register_function(lib=lib)
+        def random_uniform(low=0.0, high=0.0, size=None):
+            if size is None:
+                size = ()
+            return uniform(random_key(), shape=size, minval=low, maxval=high)
 
         # Register Jax linalg functions
         alias.register_module(jax.numpy.linalg, path="linalg", lib=lib)

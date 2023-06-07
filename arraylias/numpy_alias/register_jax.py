@@ -20,7 +20,7 @@ def register_jax(alias):
     """
     try:
         import jax
-        from jax.random import PRNGKey, split, uniform, normal
+        from jax.random import PRNGKey, uniform, normal
         from jax.core import Tracer
 
         lib = "jax"
@@ -50,19 +50,26 @@ def register_jax(alias):
 
         # JAX provides a jax.random module, so we add custom functions
         # which is similar with numpy.random module
+
         @alias.register_function(lib=lib)
         def random_seed(seed=None):
-            global _RANDOM_KEY
+            # pylint: disable=global-variable-undefined
+            global _JAX_RANDOM_KEY
             if seed is None:
                 import random
 
                 seed = random.randint(-(2**63), 2**63 - 1)
-            _RANDOM_KEY = PRNGKey(seed)
+            _JAX_RANDOM_KEY = PRNGKey(seed)
 
         def random_key():
-            if _RANDOM_KEY is None:
+            # pylint: disable=global-variable-undefined
+            global _JAX_RANDOM_KEY
+            if "_JAX_RANDOM_KEY" not in globals() and "_JAX_RANDOM_KEY" not in locals():
+                _JAX_RANDOM_KEY = None
+            if _JAX_RANDOM_KEY is None:
                 random_seed()
-            return split(_RANDOM_KEY)[0]
+            _JAX_RANDOM_KEY, res_key = jax.random.split(_JAX_RANDOM_KEY)
+            return res_key
 
         @alias.register_function(lib=lib)
         def random_normal(loc=0.0, scale=1.0, size=None):
@@ -71,7 +78,7 @@ def register_jax(alias):
             return normal(random_key(), shape=size) * scale + loc
 
         @alias.register_function(lib=lib)
-        def random_uniform(low=0.0, high=0.0, size=None):
+        def random_uniform(low=0.0, high=1.0, size=None):
             if size is None:
                 size = ()
             return uniform(random_key(), shape=size, minval=low, maxval=high)

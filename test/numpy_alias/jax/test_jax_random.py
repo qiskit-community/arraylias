@@ -9,16 +9,12 @@
 
 
 import unittest
+
+# pylint: disable=consider-using-from-import
+import scipy.stats as stats
 from arraylias import numpy_alias
 
 unp = numpy_alias()("jax")
-
-try:
-    from jax import jit, grad, vmap
-    import jax
-    import jax.numpy as jnp
-except ImportError:
-    pass
 
 
 class TestJAXRandomModule(unittest.TestCase):
@@ -37,7 +33,20 @@ class TestJAXRandomModule(unittest.TestCase):
             raise unittest.SkipTest("Skipping jax tests.") from err
 
     def test_random_seed(self):
+        """Test the same result by seeting random seed"""
         seed = 123
-        print(jax.linalg.__version__)
         unp.random_seed(seed)
-        print(_RANDOM_KEY)
+        result1 = unp.random_normal()
+        unp.random_seed(seed)
+        result2 = unp.random_normal()
+        self.assertEqual(result1, result2)
+
+    def test_random_normal(self):
+        """Test random output according to a normal distribution"""
+        for _ in range(1000):
+            self.assertTrue(unp.random_uniform() <= 1.0 and unp.random_uniform() >= 0.0)
+
+    def test_random_uniform(self):
+        """Test random output according to a uniform distribution"""
+        _, p_val = stats.normaltest([unp.random_normal() for _ in range(1000)])
+        self.assertTrue(p_val > 0.05)

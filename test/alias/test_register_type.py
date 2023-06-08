@@ -128,7 +128,7 @@ class TestRegisterType(unittest.TestCase):
         self.assertEqual(alias.infer_libs(tuple(nested)), ("int_lib",))
         self.assertEqual(alias.infer_libs(tuple(nested), allow_sequence=False), tuple())
 
-    def test_register_type_autolib(self):
+    def test_register_type__AUTOLIB(self):
         """Test automatic inference of lib from base module name"""
         alias = Alias()
         alias.register_type(complex)

@@ -20,13 +20,14 @@ def register_jax(alias):
     """
     try:
         import jax
-        from jax.interpreters.xla import DeviceArray
         from jax.core import Tracer
 
         lib = "jax"
 
         # pylint: disable = invalid-name
-        JAX_TYPES = (DeviceArray, Tracer, jax.Array)
+        JAX_TYPES = (Tracer, jax.Array)
+        if jax.__version__ <= "0.4.10":
+            JAX_TYPES += (jax.interpreters.xla.DeviceArray,)
 
         # Register jax types
         for atype in JAX_TYPES:

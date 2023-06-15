@@ -20,7 +20,7 @@ import subprocess
 # General configuration:
 
 project = u'arraylias'
-copyright = '2023, Qiskit Development Team'  # pylint: disable=redefined-builtin
+project_copyright = '2023, Qiskit Development Team'
 author = 'Qiskit Development Team'
 
 

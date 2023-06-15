@@ -38,7 +38,8 @@ def register_tensorflow_scipy(alias):
         alias (Alias): The alias dispatcher to register with.
 
     Returns:
-        bool: ``True`` if TensorFlow is installed and was successfully registered, otherwise ``False``.
+        bool: ``True`` if TensorFlow is installed and was successfully registered, otherwise 
+        ``False``.
     """
     try:
         import tensorflow as tf

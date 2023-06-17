@@ -24,8 +24,6 @@ def register_jax_types(alias):
 
         # pylint: disable = invalid-name
         JAX_TYPES = (Tracer, jax.Array)
-        if jax.__version__ <= "0.4.10":
-            JAX_TYPES += (jax.interpreters.xla.DeviceArray,)
 
         # Register jax types
         for atype in JAX_TYPES:

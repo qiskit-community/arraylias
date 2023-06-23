@@ -13,7 +13,6 @@
 
 import unittest
 import numpy as np
-import tensorflow as tf
 import scipy
 from arraylias.alias import Alias
 from arraylias.default_alias.register_numpy import register_numpy, register_scipy
@@ -33,6 +32,8 @@ except ImportError:
 
 
 class TestRegisterNumpy(unittest.TestCase):
+    """Test register type and module of numpy in numpy_alias"""
+
     def setUp(self):
         self.unp = Alias()
         self.lib = "numpy"
@@ -41,20 +42,25 @@ class TestRegisterNumpy(unittest.TestCase):
 
         self.register(self.unp)
 
-    def register(self, alias):
+    def register(self, alias: "Alias"):
+        """register numpy"""
         register_numpy(alias, register_numbers=True)
 
     def test_register_type(self):
+        """Test exact type being registered in numpy"""
         for t in self.types:
             self.assertTrue(t in self.unp._types)
             self.assertTrue(self.unp._types[t], self.lib)
 
-    def test_register_module(self):
-        for m in self.module_path.keys():
-            self.assertTrue(m, self.unp._modules[self.lib][self.module_path[m]])
+    def test_register_module_and_path(self):
+        """Test exact module and path being registered in numpy"""
+        for module, path in self.module_path.items():
+            self.assertTrue(module, self.unp._modules[self.lib][path])
 
 
 class TestRegisterScipy(TestRegisterNumpy):
+    """Test register type and module of numpy in scipy_alias"""
+
     def setUp(self):
         self.unp = Alias()
         self.lib = "numpy"
@@ -62,7 +68,8 @@ class TestRegisterScipy(TestRegisterNumpy):
 
         self.register(self.unp)
 
-    def register(self, alias):
+    def register(self, alias: "Alias"):
+        """register scipy"""
         register_scipy(alias, register_numbers=True)
 
     def test_register_type(self):
@@ -70,11 +77,13 @@ class TestRegisterScipy(TestRegisterNumpy):
 
 
 class TestRegisterJax(TestRegisterNumpy):
+    """Test register type and module of jax in numpy_alias"""
+
     @classmethod
     def setUpClass(cls):
         # skip tests of JAX not installed
         try:
-            # pylint: disable=import-outside-toplevel
+            # pylint: disable=redefined-outer-name
             import jax
 
             jax.config.update("jax_enable_x64", True)
@@ -90,16 +99,19 @@ class TestRegisterJax(TestRegisterNumpy):
 
         self.register(self.unp)
 
-    def register(self, alias):
+    def register(self, alias: "Alias"):
+        """register jax.numpy"""
         register_jax_numpy(alias)
 
 
 class TestRegisterJaxScipy(TestRegisterNumpy):
+    """Test register type and module of jax in scipy_alias"""
+
     @classmethod
     def setUpClass(cls):
         # skip tests of JAX not installed
         try:
-            # pylint: disable=import-outside-toplevel
+            # pylint: disable=redefined-outer-name
             import jax
 
             jax.config.update("jax_enable_x64", True)
@@ -114,7 +126,8 @@ class TestRegisterJaxScipy(TestRegisterNumpy):
 
         self.register(self.unp)
 
-    def register(self, alias):
+    def register(self, alias: "Alias"):
+        """register jax.scipy"""
         register_jax_scipy(alias)
 
     def test_register_type(self):
@@ -122,11 +135,13 @@ class TestRegisterJaxScipy(TestRegisterNumpy):
 
 
 class TestRegisterTensorflow(TestRegisterNumpy):
+    """Test register type and module of tensorflow in numpy_alias"""
+
     @classmethod
     def setUpClass(cls):
         # skip tests of tensorflow not installed
         try:
-            # pylint: disable=import-outside-toplevel
+            # pylint: disable=redefined-outer-name, unused-import
             import tensorflow as tf
         except Exception as err:
             raise unittest.SkipTest("Skipping tensorflow tests.") from err
@@ -139,16 +154,19 @@ class TestRegisterTensorflow(TestRegisterNumpy):
 
         self.register(self.unp)
 
-    def register(self, alias):
+    def register(self, alias: "Alias"):
+        """register tensorflow.numpy"""
         register_tensorflow_numpy(alias)
 
 
-class TestRegisterTensorflowJax(TestRegisterNumpy):
+class TestRegisterTensorflowScipy(TestRegisterNumpy):
+    """Test register type and module of tensorflow in scipy_alias"""
+
     @classmethod
     def setUpClass(cls):
         # skip tests of tensorflow not installed
         try:
-            # pylint: disable=import-outside-toplevel
+            # pylint: disable=redefined-outer-name, unused-import
             import tensorflow as tf
         except Exception as err:
             raise unittest.SkipTest("Skipping tensorflow tests.") from err
@@ -161,7 +179,8 @@ class TestRegisterTensorflowJax(TestRegisterNumpy):
 
         self.register(self.unp)
 
-    def register(self, alias):
+    def register(self, alias: "Alias"):
+        """register tensorflow.scipy"""
         register_tensorflow_scipy(alias)
 
     def test_register_type(self):

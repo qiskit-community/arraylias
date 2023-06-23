@@ -13,12 +13,11 @@
 
 import unittest
 import numpy as np
-import tensorflow as tf
 import scipy
+import tensorflow as tf
 from arraylias import scipy_alias
 
 unp = scipy_alias()()
-
 
 try:
     import jax.numpy as jnp
@@ -27,17 +26,23 @@ except ImportError:
 
 
 class TestNumpyBase(unittest.TestCase):
+    """Test Outputs when the inputs are numpy array of scipy_alias"""
+
     def setUp(self):
         self.arr_2d = np.array([[1.0, 2.0], [2.0, 1.0]])
 
-    def test_eig(self):
-        w_unp, v_unp = unp.linalg.eig(self.arr_2d)
-        w, v = scipy.linalg.eig(self.arr_2d)
+    def test_eigh(self):
+        """Test outputs of scipy.linalg.eigh and linalg.eigh func
+        by numpy_alias are identical"""
+        w_unp, v_unp = unp.linalg.eigh(self.arr_2d)
+        w, v = scipy.linalg.eigh(self.arr_2d)
         self.assertTrue(unp.allclose(w, w_unp))
         self.assertTrue(unp.allclose(v, v_unp))
 
 
 class TestJax(TestNumpyBase):
+    """Test Outputs when the inputs are jax.numpy array of scipy_alias"""
+
     @classmethod
     def setUpClass(cls):
         # skip tests of JAX not installed
@@ -50,13 +55,21 @@ class TestJax(TestNumpyBase):
         except Exception as err:
             raise unittest.SkipTest("Skipping jax tests.") from err
 
+    def setUp(self):
+        self.arr_2d = jnp.array([[1.0, 2.0], [2.0, 1.0]])
+
 
 class TestTensorflow(TestNumpyBase):
+    """Test Outputs when the inputs are tensorflow array of scipy_alias"""
+
     @classmethod
     def setUpClass(cls):
         # skip tests of tensorflow not installed
         try:
-            # pylint: disable=import-outside-toplevel
-            import tensorflow as tf
+            # pylint: disable=reimported, unused-import
+            import tensorflow
         except Exception as err:
             raise unittest.SkipTest("Skipping tensorflow tests.") from err
+
+    def setUp(self):
+        self.arr_2d = tf.constant([[1.0, 2.0], [2.0, 1.0]])

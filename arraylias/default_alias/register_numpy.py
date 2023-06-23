@@ -47,7 +47,7 @@ def register_numpy_types(alias, register_numbers=True):
 
 
 def register_numpy(alias, register_numbers=True):
-    """Register default implementation of NumPy and SciPy if installed.
+    """Register default implementation of NumPy if installed.
 
     Args:
         alias (Alias): The alias dispatcher to register with.
@@ -75,7 +75,7 @@ def register_numpy(alias, register_numbers=True):
 
 
 def register_scipy(alias, register_numbers=True):
-    """Register default implementation of NumPy and SciPy if installed.
+    """Register default implementation of SciPy if installed.
 
     Args:
         alias (Alias): The alias dispatcher to register with.

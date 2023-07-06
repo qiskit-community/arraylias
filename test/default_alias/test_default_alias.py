@@ -13,10 +13,12 @@
 
 import unittest
 import numpy as np
+import scipy
 import tensorflow as tf
-from arraylias import numpy_alias
+from arraylias import numpy_alias, scipy_alias
 
 unp = numpy_alias()()
+usp = scipy_alias()()
 
 
 try:
@@ -25,12 +27,8 @@ except ImportError:
     pass
 
 
-class TestNumpyBase(unittest.TestCase):
-    """Test Outputs when the inputs are numpy array of numpy_alias"""
-
-    def setUp(self):
-        self.arr = self.array([1.0, 2.0, 3.0, 4.0])
-        self.arr_2d = self.array([[1.0, 2.0], [2.0, 1.0]])
+class NumpyBase:
+    """Base class for testing numpy dispatching."""
 
     def array(self, arr):
         """convert list to numpy.array
@@ -42,22 +40,9 @@ class TestNumpyBase(unittest.TestCase):
         """
         return np.array(arr)
 
-    def test_sin(self):
-        """Test outputs of numpy.sin and sin func by numpy_alias are identical"""
-        arr_unp = unp.sin(self.arr)
-        self.assertTrue(isinstance(arr_unp, type(self.arr)))
-        self.assertTrue(unp.allclose(np.sin(self.arr), arr_unp))
 
-    def test_eig(self):
-        """Test outputs of numpy.linalg.eig and linalg.eig func by numpy_alias are identical"""
-        w_unp, v_unp = unp.linalg.eig(self.arr_2d)
-        w, v = np.linalg.eig(self.arr_2d)
-        self.assertTrue(unp.allclose(w, w_unp))
-        self.assertTrue(unp.allclose(v, v_unp))
-
-
-class TestJax(TestNumpyBase):
-    """Test Outputs when the inputs are jax numpy array of numpy_alias"""
+class JaxBase:
+    """Base class for testing jax dispatching."""
 
     @classmethod
     def setUpClass(cls):
@@ -82,8 +67,8 @@ class TestJax(TestNumpyBase):
         return jnp.array(arr)
 
 
-class TestTensorflow(TestNumpyBase):
-    """Test Outputs when the inputs are tensorflow array of numpy_alias"""
+class TensorflowBase:
+    """Base class for testing tensorflow dispatching."""
 
     @classmethod
     def setUpClass(cls):
@@ -104,6 +89,37 @@ class TestTensorflow(TestNumpyBase):
         """
         return tf.constant(arr)
 
+
+class TestNumpyAlias(unittest.TestCase, NumpyBase):
+    """Test Outputs when the inputs are numpy array of numpy_alias"""
+
+    def setUp(self):
+        self.arr = self.array([1.0, 2.0, 3.0, 4.0])
+        self.arr_2d = self.array([[1.0, 2.0], [2.0, 1.0]])
+
+    def test_sin(self):
+        """Test outputs of numpy.sin and sin func by numpy_alias are identical"""
+        arr_unp = unp.sin(self.arr)
+        self.assertTrue(isinstance(arr_unp, type(self.arr)))
+        self.assertTrue(unp.allclose(np.sin(self.arr), arr_unp))
+
+    def test_eig(self):
+        """Test outputs of numpy.linalg.eig and linalg.eig func by numpy_alias are identical"""
+        w_unp, v_unp = unp.linalg.eig(self.arr_2d)
+        w, v = np.linalg.eig(self.arr_2d)
+        self.assertTrue(unp.allclose(w, w_unp))
+        self.assertTrue(unp.allclose(v, v_unp))
+
+
+class TestJaxAlias(JaxBase, TestNumpyAlias):
+    """Test Outputs when the inputs are jax numpy array of numpy_alias"""
+
+    pass
+
+
+class TestTensorflowAlias(TensorflowBase, TestNumpyAlias):
+    """Test Outputs when the inputs are tensorflow array of numpy_alias"""
+
     def test_sin(self):
         """Test outputs of numpy.sin and tensorflow.experimental.numpy.sin func
         by numpy_alias are identical"""
@@ -115,3 +131,31 @@ class TestTensorflow(TestNumpyBase):
         # skip because tensorflow.experimental.numpy.linalg is not registered
         # by numpy_alias
         pass
+
+
+class TestScipyAlias(unittest.TestCase, NumpyBase):
+    """Test Outputs when the inputs are numpy array of scipy_alias"""
+
+    def setUp(self):
+        self.arr_2d = self.array([[1.0, 2.0], [2.0, 1.0]])
+
+    def test_eigh(self):
+        """Test outputs of scipy.linalg.eigh and linalg.eigh func
+        by numpy_alias are identical"""
+        w_usp, v_usp = usp.linalg.eigh(self.arr_2d)
+        w, v = scipy.linalg.eigh(self.arr_2d)
+        self.assertTrue(usp.allclose(w, w_usp))
+        self.assertTrue(usp.allclose(v, v_usp))
+
+
+class TestJaxScipyAlias(JaxBase, TestScipyAlias):
+    """Test Outputs when the inputs are jax.numpy array of scipy_alias"""
+
+    pass
+
+
+class TestTensorflowScipyAlias(TensorflowBase, TestScipyAlias):
+    """Test Outputs when the inputs are tensorflow array of scipy_alias"""
+
+    def setUp(self):
+        self.arr_2d = tf.constant([[1.0, 2.0], [2.0, 1.0]])

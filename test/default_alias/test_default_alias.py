@@ -23,6 +23,7 @@ usp = scipy_alias()()
 
 try:
     import jax.numpy as jnp
+    from jax import jit, grad, vmap
 except ImportError:
     pass
 
@@ -45,7 +46,7 @@ class JaxBase:
     """Base class for testing jax dispatching."""
 
     @classmethod
-    def setUpClass(cls):
+    def setpClass(cls):
         # skip tests of JAX not installed
         try:
             # pylint: disable=import-outside-toplevel
@@ -114,7 +115,20 @@ class TestNumpyAlias(unittest.TestCase, NumpyBase):
 class TestJaxAlias(JaxBase, TestNumpyAlias):
     """Test Outputs when the inputs are jax numpy array of numpy_alias"""
 
-    pass
+    def test_direct_jit(self):
+        """Test jit directly on dispatched function."""
+        jit_sin = jit(unp.sin)
+        self.assertTrue(unp.allclose(unp.sin(1.42), jit_sin(1.42)))
+
+    def test_direct_grad(self):
+        """Test grad directly on dispatched function."""
+        grad_sin = jit(grad(unp.sin))
+        self.assertTrue(unp.allclose(unp.cos(1.23), grad_sin(1.23)))
+
+    def test_direct_vmap(self):
+        """Test vmap directly on dispatched function."""
+        vmap_sin = vmap(unp.sin)
+        self.assertTrue(unp.allclose(unp.sin([1.23, 1.423]), vmap_sin(jnp.array([1.23, 1.423]))))
 
 
 class TestTensorflowAlias(TensorflowBase, TestNumpyAlias):

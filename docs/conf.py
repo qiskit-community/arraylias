@@ -29,7 +29,8 @@ version = '0.0.1'
 # The full version, including alpha/beta/rc tags.
 release = '0.0.1'
 
-extensions = ['sphinx.ext.autodoc',
+extensions = ['sphinx.ext.napoleon',
+              'sphinx.ext.autodoc',
               'sphinx.ext.autosummary',
               'sphinx.ext.viewcode',
               'sphinx.ext.extlinks',

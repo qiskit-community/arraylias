@@ -39,6 +39,7 @@ extensions = ['sphinx.ext.autodoc',
               'reno.sphinxext',
               'qiskit_sphinx_theme',
              ]
+templates_path = ['_templates']
 
 pygments_style = 'colorful'
 

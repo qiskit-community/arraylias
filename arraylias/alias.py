@@ -295,13 +295,12 @@ class Alias:
 
         Args:
             array_type: An array type to register for the array library.
-            lib: Optional, a name string to identify the array library.
-                If None this will be set as the base module name of the
-                arrays module.
-            prefer: prioritize this lib when dispatching on this type if the type
-                is registered to multiple libraries (Default: False).
-
+            lib: Optional, a name string to identify the array library. If None this will be set as
+                the base module name of the arrays module.
+            prefer: prioritize this lib when dispatching on this type if the type is registered to
+                multiple libraries (Default: False).
         """
+
         if lib is None:
             lib = _lib_from_object(array_type)
         self._register_lib(lib)

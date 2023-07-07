@@ -300,6 +300,7 @@ class Alias:
                 arrays module.
             prefer: prioritize this lib when dispatching on this type if the type
                 is registered to multiple libraries (Default: False).
+
         """
         if lib is None:
             lib = _lib_from_object(array_type)

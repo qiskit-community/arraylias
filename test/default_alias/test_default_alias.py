@@ -136,7 +136,8 @@ class TestTensorflowAlias(TensorflowBase, TestNumpyAlias):
 
     def test_sin(self):
         """Test outputs of numpy.sin and tensorflow.experimental.numpy.sin func
-        by numpy_alias are identical"""
+        by numpy_alias are identical.
+        """
         arr_unp = unp.sin(self.arr)
         self.assertTrue(isinstance(arr_unp, type(self.arr)))
         self.assertTrue(unp.allclose(np.sin(self.arr), arr_unp.numpy()))

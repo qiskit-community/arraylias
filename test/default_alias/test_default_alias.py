@@ -99,7 +99,7 @@ class TestNumpyAlias(unittest.TestCase, NumpyBase):
         self.arr_2d = self.array([[1.0, 2.0], [2.0, 1.0]])
 
     def test_sin(self):
-        """Test outputs of numpy.sin and sin func by numpy_alias are identical"""
+        """Test outputs of numpy.sin and sin func by numpy_alias are identical."""
         arr_unp = unp.sin(self.arr)
         self.assertTrue(isinstance(arr_unp, type(self.arr)))
         self.assertTrue(unp.allclose(np.sin(self.arr), arr_unp))

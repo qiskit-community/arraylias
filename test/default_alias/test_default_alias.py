@@ -169,7 +169,7 @@ class TestJaxScipyAlias(JaxBase, TestScipyAlias):
 
 
 class TestTensorflowScipyAlias(TensorflowBase, TestScipyAlias):
-    """Test Outputs when the inputs are tensorflow array of scipy_alias"""
+    """Test outputs when the inputs are tensorflow array of scipy_alias."""
 
     def setUp(self):
         self.arr_2d = tf.constant([[1.0, 2.0], [2.0, 1.0]])

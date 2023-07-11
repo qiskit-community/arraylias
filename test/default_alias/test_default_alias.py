@@ -149,7 +149,7 @@ class TestTensorflowAlias(TensorflowBase, TestNumpyAlias):
 
 
 class TestScipyAlias(unittest.TestCase, NumpyBase):
-    """Test Outputs when the inputs are numpy array of scipy_alias"""
+    """Test outputs when the inputs are numpy array of scipy_alias."""
 
     def setUp(self):
         self.arr_2d = self.array([[1.0, 2.0], [2.0, 1.0]])

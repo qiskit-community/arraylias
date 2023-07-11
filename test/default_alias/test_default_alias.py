@@ -105,7 +105,7 @@ class TestNumpyAlias(unittest.TestCase, NumpyBase):
         self.assertTrue(unp.allclose(np.sin(self.arr), arr_unp))
 
     def test_eig(self):
-        """Test outputs of numpy.linalg.eig and linalg.eig func by numpy_alias are identical"""
+        """Test outputs of numpy.linalg.eig and linalg.eig func by numpy_alias are identical."""
         w_unp, v_unp = unp.linalg.eig(self.arr_2d)
         w, v = np.linalg.eig(self.arr_2d)
         self.assertTrue(unp.allclose(w, w_unp))

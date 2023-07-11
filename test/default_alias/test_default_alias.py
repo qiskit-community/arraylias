@@ -132,7 +132,7 @@ class TestJaxAlias(JaxBase, TestNumpyAlias):
 
 
 class TestTensorflowAlias(TensorflowBase, TestNumpyAlias):
-    """Test Outputs when the inputs are tensorflow array of numpy_alias"""
+    """Test outputs when the inputs are tensorflow array of numpy_alias."""
 
     def test_sin(self):
         """Test outputs of numpy.sin and tensorflow.experimental.numpy.sin func

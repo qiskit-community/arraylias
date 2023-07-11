@@ -163,7 +163,7 @@ class TestScipyAlias(unittest.TestCase, NumpyBase):
 
 
 class TestJaxScipyAlias(JaxBase, TestScipyAlias):
-    """Test Outputs when the inputs are jax.numpy array of scipy_alias"""
+    """Test outputs when the inputs are jax.numpy array of scipy_alias."""
 
     pass
 

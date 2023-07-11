@@ -155,7 +155,8 @@ class TestScipyAlias(unittest.TestCase, NumpyBase):
 
     def test_eigh(self):
         """Test outputs of scipy.linalg.eigh and linalg.eigh func
-        by numpy_alias are identical"""
+        by numpy_alias are identical.
+        """
         w_usp, v_usp = usp.linalg.eigh(self.arr_2d)
         w, v = scipy.linalg.eigh(self.arr_2d)
         self.assertTrue(usp.allclose(w, w_usp))

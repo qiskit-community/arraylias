@@ -27,7 +27,7 @@ except ImportError:
     pass
 
 
-class NumpyBase:
+class NumpyBase(unittest.TestCase):
     """Base class for testing numpy dispatching."""
 
     def array(self, arr):
@@ -41,15 +41,16 @@ class NumpyBase:
         return np.array(arr)
 
 
-class JaxBase:
+class JaxBase(unittest.TestCase):
     """Base class for testing jax dispatching."""
 
     @classmethod
     def setpClass(cls):
         # skip tests of JAX not installed
         try:
-            # pylint: disable=import-outside-toplevel
+            # pylint: disable=import-outside-toplevel, reimported, unused-import
             import jax
+            import jax.numpy as jnp
 
             jax.config.update("jax_enable_x64", True)
             jax.config.update("jax_platform_name", "cpu")
@@ -67,7 +68,7 @@ class JaxBase:
         return jnp.array(arr)
 
 
-class TensorflowBase:
+class TensorflowBase(unittest.TestCase):
     """Base class for testing tensorflow dispatching."""
 
     @classmethod
@@ -90,7 +91,7 @@ class TensorflowBase:
         return tf.constant(arr)
 
 
-class TestNumpyAlias(unittest.TestCase, NumpyBase):
+class TestNumpyAlias(NumpyBase):
     """Test outputs when the inputs are numpy array of numpy_alias."""
 
     def setUp(self):
@@ -147,7 +148,7 @@ class TestTensorflowAlias(TensorflowBase, TestNumpyAlias):
         pass
 
 
-class TestScipyAlias(unittest.TestCase, NumpyBase):
+class TestScipyAlias(NumpyBase):
     """Test outputs when the inputs are numpy array of scipy_alias."""
 
     def setUp(self):

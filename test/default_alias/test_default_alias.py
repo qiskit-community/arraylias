@@ -45,12 +45,11 @@ class JaxBase(unittest.TestCase):
     """Base class for testing jax dispatching."""
 
     @classmethod
-    def setpClass(cls):
+    def setUpClass(cls):
         # skip tests of JAX not installed
         try:
-            # pylint: disable=import-outside-toplevel, reimported, unused-import
+            # pylint: disable=import-outside-toplevel
             import jax
-            import jax.numpy as jnp
 
             jax.config.update("jax_enable_x64", True)
             jax.config.update("jax_platform_name", "cpu")

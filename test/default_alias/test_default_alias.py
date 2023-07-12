@@ -22,6 +22,10 @@ usp = scipy_alias()()
 try:
     import jax.numpy as jnp
     from jax import jit, grad, vmap
+except ImportError:
+    pass
+
+try:
     import tensorflow as tf
 except ImportError:
     pass
@@ -74,7 +78,7 @@ class TensorflowBase(unittest.TestCase):
     def setUpClass(cls):
         # skip tests of tensorflow not installed
         try:
-            # pylint: disable=reimported, unused-import
+            # pylint: disable=unused-import
             import tensorflow
         except Exception as err:
             raise unittest.SkipTest("Skipping tensorflow tests.") from err

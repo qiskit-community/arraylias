@@ -75,7 +75,7 @@ class TensorflowBase(unittest.TestCase):
         # skip tests of tensorflow not installed
         try:
             # pylint: disable=reimported, unused-import
-            import tensorflow as tf
+            import tensorflow
         except Exception as err:
             raise unittest.SkipTest("Skipping tensorflow tests.") from err
 

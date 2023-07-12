@@ -38,7 +38,7 @@ extensions = ['sphinx.ext.napoleon',
               'sphinx.ext.viewcode',
               'jupyter_sphinx',
               'reno.sphinxext',
-              'qiskit',
+              'qiskit_sphinx_theme',
              ]
 templates_path = ['_templates']
 

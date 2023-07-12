@@ -14,16 +14,15 @@
 import unittest
 import numpy as np
 import scipy
-import tensorflow as tf
 from arraylias import numpy_alias, scipy_alias
 
 unp = numpy_alias()()
 usp = scipy_alias()()
 
-
 try:
     import jax.numpy as jnp
     from jax import jit, grad, vmap
+    import tensorflow as tf
 except ImportError:
     pass
 

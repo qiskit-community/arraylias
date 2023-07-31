@@ -40,6 +40,7 @@ extensions = ['sphinx.ext.napoleon',
               'reno.sphinxext',
               'qiskit_sphinx_theme',
              ]
+
 templates_path = ['_templates']
 
 language = 'en'

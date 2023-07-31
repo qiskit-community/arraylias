@@ -42,6 +42,8 @@ extensions = ['sphinx.ext.napoleon',
              ]
 templates_path = ['_templates']
 
+language = 'en'
+
 pygments_style = 'colorful'
 
 add_module_names = False
@@ -61,6 +63,17 @@ autoclass_content = 'both'
 
 # HTML Output Options
 
-html_theme = 'qiskit'
+html_theme = 'qiskit_sphinx_theme'
+
+html_last_updated_fmt = '%Y/%m/%d'
+
+html_theme_options = {
+    'logo_only': True,
+    'display_version': True,
+    'prev_next_buttons_location': 'bottom',
+    'style_external_links': True,
+}
+
+html_context = {"analytics_enabled": True}
 
 htmlhelp_basename = 'arraylias'

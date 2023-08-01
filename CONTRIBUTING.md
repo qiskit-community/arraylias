@@ -54,7 +54,7 @@ The current categories for each label are as follows:
 ### Release Notes
 
 When making any end user facing changes in a contribution we have to make sure
-we document that when we release a new version of Arraylias. The expectation
+we document that when we release a new version of arraylias. The expectation
 is that if your code contribution has user facing changes that you will write
 the release documentation for these changes. This documentation must explain
 what was changed, why it was changed, and how users can either use or adapt
@@ -163,7 +163,7 @@ After release notes have been added if you want to see what the full output of
 the release notes. In general the output from reno that we'll get is a `rst`
 (ReStructuredText) file that can be compiled by
 [sphinx](https://www.sphinx-doc.org/en/master/). To generate the rst file you
-use the ``reno report`` command. If you want to generate the full Arraylias release
+use the ``reno report`` command. If you want to generate the full arraylias release
 notes for all releases (since we started using reno during 0.9) you just run::
 
     reno report
@@ -180,7 +180,7 @@ https://github.com/Qiskit/qiskit/blob/master/docs/release_notes.rst)
 
 #### Building release notes locally
 
-Building The release notes are part of the standard Arraylias documentation
+Building The release notes are part of the standard arraylias documentation
 builds. To check what the rendered html output of the release notes will look
 like for the current state of the repo you can run: `tox -edocs` which will
 build all the documentation into `docs/_build/html` and the release notes in
@@ -253,7 +253,7 @@ option (e.g. `python -m unittest discover --buffer ./test/python`).
 
 ### Code style
 
-The Arraylias repo uses black for code formatting and style and pylint
+The arraylias repo uses black for code formatting and style and pylint
 is run to do a deeper check on the code. You can run these checks locally with
 
 ```
@@ -267,7 +267,7 @@ run it).
 
 ### Development Cycle
 
-The development cycle for Arraylias is all handled in the open using
+The development cycle for arraylias is all handled in the open using
 the project boards in Github for project management. We use milestones
 in Github to track work for specific releases. The features or other changes
 that we want to include in a release will be tagged and discussed in Github.
@@ -278,12 +278,12 @@ previous version in the release notes.
 
 * `main`:
 
-The master branch is used for development of the next version of Arraylias.
+The master branch is used for development of the next version of arraylias.
 It will be updated frequently and should not be considered stable. The API
 can and will change on master as we introduce and refine new features.
 
 * `stable/*` branches:
-Branches under `stable/*` are used to maintain released versions of Arraylias.
+Branches under `stable/*` are used to maintain released versions of arraylias.
 It contains the version of the code corresponding to the latest release for
 that minor version on pypi. For example, stable/0.8 contains the code for the
 0.8.2 release on pypi. The API on these branches are stable and the only changes
@@ -291,7 +291,7 @@ merged to it are bugfixes.
 
 ### Release cycle
 
-When it is time to release a new minor version of Arraylias we will:
+When it is time to release a new minor version of arraylias we will:
 
 1.  Create a new tag with the version number and push it to github
 2.  Change the `master` version to the next release version.
@@ -303,7 +303,7 @@ the following steps:
     on the `master` branch
 2.  Build and upload binary wheels to pypi
 3.  Create a github release page with a generated changelog
-4.  Generate a PR on the meta-repository to bump the Arraylias version and
+4.  Generate a PR on the meta-repository to bump the arraylias version and
     meta-package version.
 
 The `stable/*` branches should only receive changes in the form of bug

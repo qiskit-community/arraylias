@@ -205,7 +205,7 @@ the library, they will still be traversable by the alias. Eg
    y = unp.objectives.linear.line(a, x, b)
 
 If the ``path`` kwarg is not provided, the name of the function will be
-used as the path. Functions can
+used as the path.
 
 Registering Fallback Functions
 ------------------------------

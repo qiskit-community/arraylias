@@ -61,6 +61,7 @@ autoclass_content = 'both'
 
 # HTML Output Options
 
-html_theme = 'qiskit'
+html_theme = 'qiskit-ecosystem'
+html_title = f"{project} {release}"
 
 htmlhelp_basename = 'arraylias'

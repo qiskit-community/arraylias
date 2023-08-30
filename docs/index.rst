@@ -10,6 +10,7 @@ that can be run on multiple array types from different array libraries.
 
   User Guide <userguide/index>
   API References <apidocs/index>
+  Tutorial <tutorials/index>
 
 .. Hiding - Indices and tables
    :ref:`genindex`

@@ -23,7 +23,7 @@ Reference documentation may be found [here](https://qiskit.org/ecosystem/arrayli
 Arraylias is installed by using `pip`:
 
 ```
-pip install Arraylias
+pip install arraylias
 ```
 
 ## Contribution Guidelines

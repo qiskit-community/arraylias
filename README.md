@@ -13,10 +13,6 @@ Arraylias provides supports for aliasing some array libraries, [NumPy](https://g
 Also, Arraylias provides another features about [Scipy](https://github.com/scipy/scipy). 
 Scipy is an open-source Python library for scientific computing. It builds on Numpy and provides support for mathematical operations, matrix calculation, and multi-dimensional arrays. Some array types allows to use scipy-like modules, which are built on the respective array libraries. Arraylias provides aliases for these scipy-like modules.
 
-Reference documentation may be found [here](https://qiskit.org/ecosystem/arraylias/), including
-[tutorials](https://qiskit.org/ecosystem/arraylias/tutorials/index.html),
-[user guide](https://qiskit.org/ecosystem/arraylias/userguide/index.html),
-[API reference](https://qiskit.org/ecosystem/arraylias/apidocs/index.html).
 
 ## Installation
 

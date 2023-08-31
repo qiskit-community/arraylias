@@ -65,7 +65,7 @@ autoclass_content = 'both'
 # HTML Output Options
 
 html_theme = 'qiskit-ecosystem'
-
+html_title = f"{project} {release}"
 html_last_updated_fmt = '%Y/%m/%d'
 
 html_context = {"analytics_enabled": True}

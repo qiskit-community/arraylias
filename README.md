@@ -4,14 +4,22 @@
 
 **This repo is still in the early stages of development, there will be breaking API changes**
 
-Arraylias is an open-source Python library for writing Python code that
-can be run on multiple array types by aliasing different array libraries.
-Arraylias enables users to reduce the time and effort of writing codes to use various arrays.
-Arraylias provides supports for aliasing some array libraries, [NumPy](https://github.com/numpy/numpy),
-[JAX](https://github.com/google/jax), and [Tensorflow](https://github.com/tensorflow).
+Arraylias is an open-source Python library providing single-dispatching tools centred around the
+construction of an aliased module. Aliased modules are built by initially registering "libraries"
+consisting of a collection of types, then registering different versions of a given function in the
+aliased module for each underlying type library. When using the aliased module, function calls are
+automatically dispatched to version of the function for the correct library based on the type of the
+first argument.
 
-Also, Arraylias provides another features about [Scipy](https://github.com/scipy/scipy). 
-Scipy is an open-source Python library for scientific computing. It builds on Numpy and provides support for mathematical operations, matrix calculation, and multi-dimensional arrays. Some array types allows to use scipy-like modules, which are built on the respective array libraries. Arraylias provides aliases for these scipy-like modules.
+Arraylias contains default pre-built aliased versions of both
+[NumPy](https://github.com/numpy/numpy) and [Scipy](https://github.com/scipy/scipy), with additional
+registration of the [JAX](https://github.com/google/jax) and
+[Tensorflow](https://github.com/tensorflow) array libraries. This enables writing
+[NumPy](https://github.com/numpy/numpy) and [Scipy](https://github.com/scipy/scipy) like code that
+will that will execute on [NumPy](https://github.com/numpy/numpy),
+[JAX](https://github.com/google/jax), and [Tensorflow](https://github.com/tensorflow) array objects
+as if it had been written in the respective native libraries. If necessary, these default aliases
+can be further extended to fit the needs of the application.
 
 
 ## Installation

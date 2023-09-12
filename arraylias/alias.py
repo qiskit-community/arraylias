@@ -1,3 +1,7 @@
+# This code is part of Qiskit.
+#
+# (C) Copyright IBM 2023.
+#
 # This code is licensed under the Apache License, Version 2.0. You may
 # obtain a copy of this license in the LICENSE.txt file in the root directory
 # of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.
@@ -132,16 +136,16 @@ class Alias:
 
         Args:
             path: A function or module path to alias. If ``None`` the base module
-                  will be returned.
+                will be returned.
             like: Infer library based on type or object and statically dispatch to
-                  that libraries function or module.
+                that libraries function or module.
 
         Returns:
             The aliased module or function.
 
         Raises:
             ValueError: if a specific array library is specified in both path
-                        and the like kwarg is used.
+                and the like kwarg is used.
         """
         if like is not None:
             libs = self.infer_libs(like)
@@ -175,10 +179,10 @@ class Alias:
             func: The function to dispatch to for the specified array library.
                 If None this will return a decorator to apply to a function.
             lib: Optional, a name string to identify the array library.
-                 If ``None`` this will be set as the base module name of the
-                 arrays module.
+                If ``None`` this will be set as the base module name of the
+                arrays module.
             path: Optional, the path for dispatching to this function. If ``None``
-                  the name of the input function will be used.
+                the name of the input function will be used.
 
         Returns:
             If func is None returns a decorator for registering a function.
@@ -226,9 +230,9 @@ class Alias:
 
         Args:
             func: The function to dispatch to for the specified array library.
-                  If None this will return a decorator to apply to a function.
+                If None this will return a decorator to apply to a function.
             path: Optional, the path for dispatching to this function. If None
-                  the name of the input function will be used.
+                the name of the input function will be used.
 
         Returns:
             If func is None returns a decorator for registering a function.
@@ -250,14 +254,14 @@ class Alias:
 
         Args:
             module: A module, namespace, or class to look for attributes
-                    corresponding to the dispatched function name.
+                corresponding to the dispatched function name.
             lib: Optional, a name string to identify the array library.
-                 If ``None`` this will be set as the base module name of the
-                 arrays module.
+                If ``None`` this will be set as the base module name of the
+                arrays module.
             path: Optional, the path for the module. If empty this module
-                  will be added to the base path for the library.
+                will be added to the base path for the library.
             prefer: Prioritize searching this module before previously
-                    registered modules for the current path (Default: ``False``).
+                registered modules for the current path (Default: ``False``).
 
         .. note::
 
@@ -295,12 +299,12 @@ class Alias:
 
         Args:
             array_type: An array type to register for the array library.
-            lib: Optional, a name string to identify the array library.
-                 If None this will be set as the base module name of the
-                 arrays module.
-            prefer: prioritize this lib when dispatching on this type if the type
-                    is registered to multiple libraries (Default: False).
+            lib: Optional, a name string to identify the array library. If None this will be set as
+                the base module name of the arrays module.
+            prefer: prioritize this lib when dispatching on this type if the type is registered to
+                multiple libraries (Default: False).
         """
+
         if lib is None:
             lib = _lib_from_object(array_type)
         self._register_lib(lib)
@@ -320,7 +324,7 @@ class Alias:
         Args:
             obj: array object to check.
             allow_sequence: If True recursively check the element type of
-                            list and tuple objects (Default: True).
+                list and tuple objects (Default: True).
 
         Returns:
             A tuple of library names registered for the input object type.
@@ -386,9 +390,9 @@ class Alias:
 
         Args:
             lib: Optional, the name string to identify the array library.
-                 If None the base function module will be used.
+                If None the base function module will be used.
             path: Optional, the aliased path for this function.
-                  If ``None`` the function name will be used.
+                If ``None`` the function name will be used.
 
         Returns:
             A function decorator to register a function if dispatched_function
@@ -424,7 +428,7 @@ class Alias:
 
         Args:
             path: Optional, the aliased path to this function.
-                  If None the function name will be used.
+                If None the function name will be used.
 
         Returns:
             A function decorator to register a function if dispatched_function
@@ -447,7 +451,7 @@ class Alias:
 
         Args:
             path: Optional, the path for dispatching to this function.
-                  If None the function name will be used.
+                If None the function name will be used.
 
         Returns:
             A function decorator to register a function if dispatched_function

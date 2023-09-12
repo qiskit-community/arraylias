@@ -1,14 +1,14 @@
-# Licensed under the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License. You may obtain
-# a copy of the License at
+# This code is part of Qiskit.
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+# (C) Copyright IBM 2023.
 #
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
+# This code is licensed under the Apache License, Version 2.0. You may
+# obtain a copy of this license in the LICENSE.txt file in the root directory
+# of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.
+#
+# Any modifications or derivative works of this code must retain this
+# copyright notice, and modified files need to carry a notice indicating
+# that they have been altered from the originals.
 
 #
 # arraylias documentation build configuration file
@@ -20,7 +20,8 @@ import subprocess
 # General configuration:
 
 project = u'arraylias'
-copyright = u'2022, Christopher J. Wood'
+project_copyright = '2023, Qiskit Development Team'
+author = 'Qiskit Development Team'
 
 
 # The short X.Y version.
@@ -28,7 +29,8 @@ version = '0.0.1'
 # The full version, including alpha/beta/rc tags.
 release = '0.0.1'
 
-extensions = ['sphinx.ext.autodoc',
+extensions = ['sphinx.ext.napoleon',
+              'sphinx.ext.autodoc',
               'sphinx.ext.autosummary',
               'sphinx.ext.viewcode',
               'sphinx.ext.extlinks',
@@ -36,10 +38,12 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'jupyter_sphinx',
               'reno.sphinxext',
+              'qiskit_sphinx_theme',
              ]
-html_static_path = ['_static']
+
 templates_path = ['_templates']
-html_css_files = ['style.css', 'custom.css']
+
+language = 'en'
 
 pygments_style = 'colorful'
 
@@ -60,13 +64,10 @@ autoclass_content = 'both'
 
 # HTML Output Options
 
-html_theme = 'qiskit_sphinx_theme'
+html_theme = 'qiskit-ecosystem'
+html_title = f"{project} {release}"
+html_last_updated_fmt = '%Y/%m/%d'
 
-html_theme_options = {
-    'logo_only': False,
-    'display_version': True,
-    'prev_next_buttons_location': 'bottom',
-    'style_external_links': True,
-}
+html_context = {"analytics_enabled": True}
 
 htmlhelp_basename = 'arraylias'

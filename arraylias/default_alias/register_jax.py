@@ -1,3 +1,7 @@
+# This code is part of Qiskit.
+#
+# (C) Copyright IBM 2023.
+#
 # This code is licensed under the Apache License, Version 2.0. You may
 # obtain a copy of this license in the LICENSE.txt file in the root directory
 # of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,8 +28,6 @@ def register_jax_types(alias):
 
         # pylint: disable = invalid-name
         JAX_TYPES = (Tracer, jax.Array)
-        if jax.__version__ <= "0.4.10":
-            JAX_TYPES += (jax.interpreters.xla.DeviceArray,)
 
         # Register jax types
         for atype in JAX_TYPES:

@@ -15,8 +15,8 @@ In this section, we will go through the following steps:
 
 1. Import the required libraries and initialize the numpy alias.
 2. Define the equation using :class:`.Alias`.
-3. Solve the equation using existing solvers.
-4. Register custom functions using :meth:`.Alias.register_function` method.
+3. Solve the right-hand side function using existing solvers.
+4. Register custom solvers using :meth:`.Alias.register_function` method.
 5. Solve using the custom function.
 
 
@@ -91,8 +91,8 @@ We eventually want to find the probability of existence of this qubit state, so 
         probabilities = unp.abs(state) ** 2
         return probabilities / unp.sum(probabilities)
 
-3. Solve the equation using existing solvers
---------------------------------------------
+3. Solve the right-hand side function using existing solvers
+------------------------------------------------------------
 
 First, we solve the equation by using Numpy as the input and ``scipy.integrate.solve_ivp`` as a solver.
 We define the initial state, the time span for the simulation, and time point we want to simulate.
@@ -143,8 +143,8 @@ Second, we solve the equation by using Jax.array as the input and ``jax.experime
 
 
 
-4. Register custom functions using :meth:`.Alias.register_function`
--------------------------------------------------------------------
+4. Register custom solvers using :meth:`.Alias.register_function`
+-----------------------------------------------------------------
 
 Arraylais provides to register your own custom function using :meth:`.Alias.register_function` method.
 In this section, we introduce how to register the function, taking the Runge-Kutta method as an example.

@@ -76,8 +76,11 @@ We can express the right-hand side (RHS) function of this equation as follows:
 
 .. jupyter-execute::
 
-    def rhs(t,y,Z,X):
-        return unp.matmul(-1j * (5 * Z -  unp.cos(10 * t) * X ),y)
+    Z = np.array([[1,0],[0,-1]])
+    X = np.array([[0,1],[1,0]])
+
+    def rhs(t,y):
+        return unp.matmul(-1j * (5 * Z -  unp.cos(10 * t) * X ), y)
 
 We can utilize :class:`.Alias` intuitively just like `NumPy <https://numpy.org/>`_, `JAX <https://github.com/google/jax>`_, and so on.
 This generic code provided by Arraylias includes ``unp.matmul()``, which automatically select the appropriate module
@@ -88,8 +91,7 @@ We eventually want to find the probability of existence of this qubit state, so 
 .. jupyter-execute::
 
     def state_probabilities(state):
-        probabilities = unp.abs(state) ** 2
-        return probabilities / unp.sum(probabilities)
+        return unp.abs(state) ** 2
 
 3. Solve the right-hand side function using existing solvers
 ------------------------------------------------------------
@@ -99,8 +101,6 @@ We define the initial state, the time span for the simulation, and time point we
 
 .. jupyter-execute::
 
-    Z = np.array([[1,0],[0,-1]])
-    X = np.array([[0,1],[1,0]])
     init_state = np.array([1. + 0j,0. + 0j])
 
     t_span = [0,(N-1) * dt]
@@ -110,7 +110,7 @@ We solve by using ``scipy.integrate.solve_ivp`` and plot the probabilities of ea
 
 .. jupyter-execute::
 
-    sol = solve_ivp(rhs,t_span,init_state,args=(Z,X),method='RK45',t_eval=T)
+    sol = solve_ivp(rhs,t_span,init_state,method='RK45',t_eval=T)
     probabilities = state_probabilities(sol.y)
 
     plt.plot(sol.t, probabilities[0], label="0")
@@ -125,14 +125,12 @@ Second, we solve the equation by using Jax.array as the input and ``jax.experime
 
 .. jupyter-execute::
 
-    Z = jnp.array([[1,0],[0,-1]])
-    X = jnp.array([[0,1],[1,0]])
     init_state = jnp.array([1. + 0j,0. + 0j])
 
     t_span = [0,(N-1) * dt]
     T = jnp.linspace(0,(N-1) * dt,N)
 
-    sol = odeint(lambda y,t: rhs(t,y,Z,X),init_state,T)
+    sol = odeint(lambda y,t: rhs(t,y), init_state, T)
     probabilities = state_probabilities(sol.T)
     plt.plot(T, probabilities[0], label="0")
     plt.plot(T, probabilities[1], label="1")
@@ -156,11 +154,11 @@ We define the function for the Runge-Kutta method to be used later here:
 
 .. jupyter-execute::
 
-    def runge_kutta_step(Z, X, n, state):
-        k1 = dt * rhs(n * dt, state, Z, X)
-        k2 = dt * rhs(n * dt + 0.5 * dt, state + 0.5*k1, Z, X)
-        k3 = dt * rhs(n * dt + 0.5 * dt, state + 0.5*k2, Z, X)
-        k4 = dt * rhs(n * dt + dt, state + k3, Z, X)
+    def runge_kutta_step(n, state):
+        k1 = dt * rhs(n * dt, state)
+        k2 = dt * rhs(n * dt + 0.5 * dt, state + 0.5*k1)
+        k3 = dt * rhs(n * dt + 0.5 * dt, state + 0.5*k2)
+        k4 = dt * rhs(n * dt + dt, state + k3)
         return (k1 + 2*k2 + 2*k3 + k4) / 6.
 
 JAX's strength lies in vectorized operations and parallel computations. In some cases, Python for loops
@@ -180,7 +178,7 @@ In Numpy case, we define the function ``runge_kutta`` for Numpy.
         probabilities = []
         for n in range(N):
             probabilities.append(state_probabilities(state))
-            state+= runge_kutta_step(Z, X, n, state)
+            state+= runge_kutta_step(n, state)
         return probabilities
 
 
@@ -197,7 +195,7 @@ In the case of JAX, we want to use ``jax.lax.scan`` function for instead of Pyth
         def runge_kutta_step_scan(carry, probabilities):
             n, state = carry
             probabilities = state_probabilities(state)
-            state+= runge_kutta_step(Z, X, n, state)
+            state+= runge_kutta_step(n, state)
             return (n + 1, state), probabilities
         _, probabilities = jax.lax.scan(runge_kutta_step_scan, (0, state), jnp.zeros((N,2)))
         return probabilities
@@ -212,8 +210,6 @@ The Numpy case is here:
 
 .. jupyter-execute::
 
-    Z = np.array([[1,0],[0,-1]])
-    X = np.array([[0,1],[1,0]])
     init_state = np.array([1. + 0j,0. + 0j])
 
     probabilities = unp.array(unp.runge_kutta(init_state, N))
@@ -234,8 +230,6 @@ Second case is JAX:
 
 .. jupyter-execute::
 
-    Z = jnp.array([[1,0],[0,-1]])
-    X = jnp.array([[0,1],[1,0]])
     init_state = jnp.array([1. + 0j,0. + 0j])
     probabilities = unp.array(unp.runge_kutta(init_state, N))
 

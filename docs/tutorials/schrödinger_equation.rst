@@ -13,19 +13,17 @@ In addition, we will showcase the utility of :meth:`.Alias.register_function` me
 
 In this section, we will go through the following steps:
 
-1. Import the required libraries.
-2. Initialize the numpy alias.
-3. Define the equation using :class:`.Alias`.
-4. Solve the equation using existing solvers.
-5. Register custom functions using :meth:`.Alias.register_function` method.
-6. Solve using the custom function.
+1. Import the required libraries and initialize the numpy alias.
+2. Define the equation using :class:`.Alias`.
+3. Solve the equation using existing solvers.
+4. Register custom functions using :meth:`.Alias.register_function` method.
+5. Solve using the custom function.
 
 
-1. Import the required libraries
---------------------------------
+1. Import the required libraries and initialize the numpy alias
+---------------------------------------------------------------
 
 Here, we import the necesary libraries.
-
 
 .. jupyter-execute::
     :hide-code:
@@ -48,8 +46,6 @@ Here, we import the necesary libraries.
     dt = 0.01
     N = 1001
 
-2. Initialize the numpy alias
------------------------------
 
 The :func:`.numpy_alias` function returns a pre-registered :class:`.Alias` instance with modules such as 
 `NumPy <https://numpy.org/>`_, `JAX <https://github.com/google/jax>`_, and `Tensorflow <https://www.tensorflow.org/>`_,
@@ -62,7 +58,7 @@ We initialize Arraylias using the :func:`.numpy_alias` function and :class:`.Ali
     alias = numpy_alias()
     unp = alias()
 
-3. Define the equation using :class:`.Alias`
+2. Define the equation using :class:`.Alias`
 --------------------------------------------
 
 We solve the Schrödinger equation using the Runge-Kutta method in this tutorial.
@@ -95,7 +91,7 @@ We eventually want to find the probability of existence of this qubit state, so 
         probabilities = unp.abs(state) ** 2
         return probabilities / unp.sum(probabilities)
 
-4. Solve the equation using existing solvers
+3. Solve the equation using existing solvers
 --------------------------------------------
 
 First, we solve the equation by using Numpy as the input and ``scipy.integrate.solve_ivp`` as a solver.
@@ -147,7 +143,7 @@ Second, we solve the equation by using Jax.array as the input and ``jax.experime
 
 
 
-5. Register custom functions using :meth:`.Alias.register_function`
+4. Register custom functions using :meth:`.Alias.register_function`
 -------------------------------------------------------------------
 
 Arraylais provides to register your own custom function using :meth:`.Alias.register_function` method.
@@ -206,7 +202,7 @@ In the case of JAX, we want to use ``jax.lax.scan`` function for instead of Pyth
         _, probabilities = jax.lax.scan(runge_kutta_step_scan, (0, state), jnp.zeros((N,2)))
         return probabilities
 
-6. Solve using the custom function
+5. Solve using the custom function
 ----------------------------------
 
 We have just completed writing the generic code to solve the Schrödinger equation.

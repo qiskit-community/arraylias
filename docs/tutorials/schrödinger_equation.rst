@@ -6,10 +6,6 @@
 Time evolution of the Schrödinger equation
 ==========================================
 
-
-Arraylias provides a way to configure aliased modules for certain libraries, thereby eliminating the need for us
-to write separate code for each of them.
-
 In this tutorial, we will learn how to write generic code with examples of numerical computation by using 
 `NumPy <https://numpy.org/>`_ and `JAX <https://github.com/google/jax>`_.
 We'll use a code example that employs the Runge-Kutta method to numerically simulate the matrix evolution of the Schrödinger equation.

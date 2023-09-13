@@ -82,9 +82,18 @@ We can express the right-hand side (RHS) function of this equation as follows:
     def rhs(t,y):
         return unp.matmul(-1j * (5 * Z -  unp.cos(10 * t) * X ), y)
 
-We can utilize :class:`.Alias` intuitively just like `NumPy <https://numpy.org/>`_, `JAX <https://github.com/google/jax>`_, and so on.
-This generic code provided by Arraylias includes ``unp.matmul()``, which automatically select the appropriate module
-based on the input type.
+We can confirm that the rhs function outputs the type corresponding to the input type.
+
+.. jupyter-execute::
+
+    # Numpy input
+    rhs(0.1, np.array([0., 1.]))
+
+
+.. jupyter-execute::
+
+    # Jax.numpy input
+    rhs(jnp.array(0.1), jnp.array([0., 1.]))
 
 We eventually want to find the probability of existence of this qubit state, so we will prepare the following function.
 

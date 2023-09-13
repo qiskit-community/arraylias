@@ -155,13 +155,22 @@ Second, we solve the equation by using Jax.array as the input and ``jax.experime
 4. Register custom solvers using :meth:`.Alias.register_function`
 -----------------------------------------------------------------
 
-Arraylais provides to register your own custom function using :meth:`.Alias.register_function` method.
-In this section, we introduce how to register the function, taking the Runge-Kutta method as an example.
+In this section, we introduce how to register the function, taking the 4th order Runge-Kutta method
+to solve ordinary differential equations as an example.
 
-The Runge-Kutta method solves differential equations by approximating power series up to
-the foruth order terms. It allows to find solutions through numerically calculations.
+The 4th order Runge-Kutta fomula is here:
 
-We define the function for the Runge-Kutta method to be used later here:
+.. math::
+
+    k_1 &= h \cdot f(t_n, y_n) \\
+    k_2 &= h \cdot f(t_n + \frac{h}{2}, y_n + \frac{k_1}{2}) \\
+    k_3 &= h \cdot f(t_n + \frac{h}{2}, y_n + \frac{k_2}{2}) \\
+    k_4 &= h \cdot f(t_n + h, y_n + k_3) \\
+    y_{n+1} &= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+
+, where :math:`y_{n}`, :math:`t_{n}`, and :math:`h` are current solution, current time, and time step size, respectively.
+
+We define the Runge-Kutta method to be used later here:
 
 .. jupyter-execute::
 
@@ -172,13 +181,8 @@ We define the function for the Runge-Kutta method to be used later here:
         k4 = dt * rhs(n * dt + dt, state + k3)
         return (k1 + 2*k2 + 2*k3 + k4) / 6.
 
-JAX's strength lies in vectorized operations and parallel computations. In some cases, Python for loops
-may not effectively use JAX's optimizations. Therefore, it is recommended to avoid using the Python for 
-loops to effectively maximize JAX's strength. Using ``jax.lax.scan`` function could enable efficiently
-parallel computations.
-
-We can create custom functions for each library by using :meth:`.Alias.register_function` method.
-
+When writing the custom solver, we write and register a version for both NumPy and JAX. 
+The NumPy version uses standard Python loops, whereas the JAX version uses the JAX looping construct ``jax.lax.scan``.
 
 In Numpy case, we define the function ``runge_kutta`` for Numpy.
 
@@ -193,11 +197,10 @@ In Numpy case, we define the function ``runge_kutta`` for Numpy.
         return probabilities
 
 
-
 This custom function of ``runge_kutta`` is registered using the decorator ``@alias.register_function`` under 
 NumPy.
 
-In the case of JAX, we want to use ``jax.lax.scan`` function for instead of Python for efficient loops.
+In the case of JAX,
 
 .. jupyter-execute::
 
@@ -252,7 +255,7 @@ Second case is JAX:
     plt.legend()
     plt.show()
 
-We see if we can actually jit.
+We see if we can actually jit the custom solver.
 
 .. jupyter-execute::
 
@@ -266,8 +269,3 @@ We see if we can actually jit.
 
     %timeit solve_with_RungeKutta_jit(init_state, N)
 
-By following these steps, we've learned how to leverage Arraylias to 
-write versatile numerical code that can efficiently switch between different arrays.
-We've also explored how to accelerate our code's execution using JAX's JIT compilation.
-By understanding the strengths of different numerical libraries and harnessing their capabilities through Arraylias, we can create high-performance code for various computational tasks. 
-Apply these concepts to your own projects to unlock their full potential.

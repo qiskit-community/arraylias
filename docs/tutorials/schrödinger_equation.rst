@@ -3,8 +3,8 @@
 .. module:: rungekutta
 
 
-Time evolution of the Schrödinger equation
-==========================================
+Solving the Schrodinger equation with either NumPy or JAX using the default NumPy alias
+=======================================================================================
 
 In this tutorial, we will learn how to write generic code with examples of numerical computation by using 
 `NumPy <https://numpy.org/>`_ and `JAX <https://github.com/google/jax>`_.

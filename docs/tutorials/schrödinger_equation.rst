@@ -105,6 +105,8 @@ We eventually want to find the probability of existence of this qubit state, so 
 3. Solve the right-hand side function using existing solvers
 ------------------------------------------------------------
 
+Here we show how the rhs function can be passed to numerical ODE solvers in both SciPy and JAX as if the function had been natively written in either library.
+
 First, we solve the equation by using Numpy as the input and ``scipy.integrate.solve_ivp`` as a solver.
 We define the initial state, the time span for the simulation, and time point we want to simulate.
 

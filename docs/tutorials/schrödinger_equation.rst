@@ -61,6 +61,7 @@ We solve the Schrödinger equation using the Runge-Kutta method in this tutorial
 The Schrödinger equation is the differential equation
 
 .. math:: \psi'(t) = -i * H(t) \psi(t)
+where :math:`H(t)` is a time-dependent matrix called the Hamiltonian, and :math:`\psi(t)` is the state of the system.
 
 We will solve a common model for a two-level quantum system, which has Hamiltonian
 

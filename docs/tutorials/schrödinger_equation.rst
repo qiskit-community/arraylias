@@ -67,7 +67,7 @@ We will solve a common model for a two-level quantum system, which has Hamiltoni
 
 .. math:: H(t) = \times 2 \pi \nu_z \frac{Z}{2} + 2 \pi \nu_x \cos(2 \pi \nu_d t)\frac{X}{2},
 
-where :math:`\{X,Y,Z\}` are the Pauli matrices.
+where :math:`\{X,Y,Z\}` are the Pauli matrices, and :math:`\nu_z`, :math:`\nu_x`, and :math:`\nu_d` are model parameters of the system.
 
 We can express the right-hand side (RHS) function of this equation as follows:
 

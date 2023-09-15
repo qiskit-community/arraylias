@@ -58,7 +58,7 @@ Initialize the default NumPy alias.
 --------------------------------------------
 
 We solve the Schrödinger equation using the Runge-Kutta method in this tutorial.
-The Schrödinger equation is written as
+The Schrödinger equation is the differential equation
 
 .. math:: \psi'(t) = -i * H(t) \psi(t)
 

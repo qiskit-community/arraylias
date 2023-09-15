@@ -220,7 +220,7 @@ In the case of JAX,
 We have just completed writing the generic code to solve the Schrödinger equation.
 We will now demonstrate two cases of solving the equation using NumPy and JAX as inputs.
 
-The Numpy case is here:
+First, solve with NumPy:
 
 .. jupyter-execute::
 

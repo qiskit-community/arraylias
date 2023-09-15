@@ -154,7 +154,7 @@ Second, we solve the equation by using Jax.array as the input and ``jax.experime
 
 In this section, we define custom functions for solving differential equations in both NumPy and JAX, and register them to our instance of the NumPy alias.
 
-The 4th order Runge-Kutta fomula is here:
+We will use the 4th order Runge-Kutta method, whose single step formula is:
 
 .. math::
 

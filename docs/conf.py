@@ -38,6 +38,7 @@ extensions = ['sphinx.ext.napoleon',
               'sphinx.ext.viewcode',
               'jupyter_sphinx',
               'reno.sphinxext',
+              'nbsphinx',
               'qiskit_sphinx_theme',
              ]
 

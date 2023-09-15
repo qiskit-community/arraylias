@@ -213,8 +213,7 @@ Next, register a version of the solver to work on JAX arrays. For better behavio
 5. Solve using the custom function
 ----------------------------------
 
-We have just completed writing the generic code to solve the Schrödinger equation.
-We will now demonstrate two cases of solving the equation using NumPy and JAX as inputs.
+Finally, we will solve the Schrödinger equation using both the NumPy and JAX libraries via our single dispatched function ``unp.runge_kutta``.
 
 First, solve with NumPy:
 

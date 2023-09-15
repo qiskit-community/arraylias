@@ -29,7 +29,9 @@ Here, we import the necesary libraries.
     :hide-code:
 
     import warnings
-    warnings.filterwarnings('ignore', message='', category=Warning, module='', lineno=0, append=False)
+    warnings.filterwarnings('ignore')
+
+
 
 .. jupyter-execute::
 

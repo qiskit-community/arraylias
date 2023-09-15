@@ -152,8 +152,7 @@ Second, we solve the equation by using Jax.array as the input and ``jax.experime
 4. Register custom solvers using :meth:`.Alias.register_function`
 -----------------------------------------------------------------
 
-In this section, we introduce how to register the function, taking the 4th order Runge-Kutta method
-to solve ordinary differential equations as an example.
+In this section, we define custom functions for solving differential equations in both NumPy and JAX, and register them to our instance of the NumPy alias.
 
 The 4th order Runge-Kutta fomula is here:
 

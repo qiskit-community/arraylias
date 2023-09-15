@@ -64,7 +64,7 @@ The Schrödinger equation is written as
 
 The equation we are solving represents a qubit's state as a two-level system. The Hamiltonian is
 
-.. math:: H = \frac{1}{2} \times 2 \pi \nu_z {Z} + 2 \pi \nu_x \cos(2 \pi \nu_d t){X},
+.. math:: H(t) = \times 2 \pi \nu_z \frac{Z}{2} + 2 \pi \nu_x \cos(2 \pi \nu_d t)\frac{X}{2},
 
 where :math:`\{X,Y,Z\}` are the Pauli matrices.
 

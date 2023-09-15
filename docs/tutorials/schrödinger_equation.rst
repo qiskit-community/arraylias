@@ -62,7 +62,7 @@ The Schrödinger equation is written as
 
 .. math:: \psi'(t) = -i * H(t) \psi(t)
 
-The equation we are solving represents a qubit's state as a two-level system. The Hamiltonian is
+We will solve a common model for a two-level quantum system, which has Hamiltonian
 
 .. math:: H(t) = \times 2 \pi \nu_z \frac{Z}{2} + 2 \pi \nu_x \cos(2 \pi \nu_d t)\frac{X}{2},
 

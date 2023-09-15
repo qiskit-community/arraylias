@@ -177,8 +177,6 @@ We define the Runge-Kutta method to be used later here:
         k4 = dt * rhs(n * dt + dt, state + k3)
         return (k1 + 2*k2 + 2*k3 + k4) / 6.
 
-When writing the custom solver, we write and register a version for both NumPy and JAX. 
-The NumPy version uses standard Python loops, whereas the JAX version uses the JAX looping construct ``jax.lax.scan``.
 
 In Numpy case, we define the function ``runge_kutta`` for Numpy.
 

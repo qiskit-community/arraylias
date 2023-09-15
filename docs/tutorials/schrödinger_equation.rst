@@ -193,9 +193,6 @@ In Numpy case, we define the function ``runge_kutta`` for Numpy.
         return probabilities
 
 
-This custom function of ``runge_kutta`` is registered using the decorator ``@alias.register_function`` under 
-NumPy.
-
 Next, register a version of the solver to work on JAX arrays. For better behaviour under JAX transformations, we need to use the JAX looping construct ``jax.lax.scan`` rather than the standard Python ``for`` loop:
 
 .. jupyter-execute::

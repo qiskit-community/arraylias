@@ -60,7 +60,8 @@ Initialize the default NumPy alias.
 We solve the Schrödinger equation using the Runge-Kutta method in this tutorial.
 The Schrödinger equation is the differential equation
 
-.. math:: \psi'(t) = -i * H(t) \psi(t)
+.. math:: \psi'(t) = -i * H(t) \psi(t),
+
 where :math:`H(t)` is a time-dependent matrix called the Hamiltonian, and :math:`\psi(t)` is the state of the system.
 
 We will solve a common model for a two-level quantum system, which has Hamiltonian
@@ -170,11 +171,11 @@ We define the Runge-Kutta method to be used later here:
 
 .. jupyter-execute::
 
-    def runge_kutta_step(n, state):
-        k1 = dt * rhs(n * dt, state)
-        k2 = dt * rhs(n * dt + 0.5 * dt, state + 0.5*k1)
-        k3 = dt * rhs(n * dt + 0.5 * dt, state + 0.5*k2)
-        k4 = dt * rhs(n * dt + dt, state + k3)
+    def runge_kutta_step(t, y, dt, rhs):
+        k1 = dt * rhs(t, y)
+        k2 = dt * rhs(t + 0.5 * dt, y + 0.5*k1)
+        k3 = dt * rhs(t + 0.5 * dt, y + 0.5*k2)
+        k4 = dt * rhs(t + dt, y + k3)
         return (k1 + 2*k2 + 2*k3 + k4) / 6.
 
 
@@ -183,11 +184,11 @@ First, define the version of the solver written for use with standard NumPy, and
 .. jupyter-execute::
 
     @alias.register_function(lib="numpy", path="runge_kutta")
-    def _(state, N):
+    def _(y0, dt, N, rhs):
         probabilities = []
         for n in range(N):
-            probabilities.append(state_probabilities(state))
-            state+= runge_kutta_step(n, state)
+            probabilities.append(state_probabilities(y0))
+            y0+= runge_kutta_step(n * dt, y0, dt, rhs)
         return probabilities
 
 
@@ -196,13 +197,13 @@ Next, register a version of the solver to work on JAX arrays. For better behavio
 .. jupyter-execute::
 
     @alias.register_function(lib="jax", path="runge_kutta")
-    def _(state, N):
+    def _(y0, dt, N, rhs):
         def runge_kutta_step_scan(carry, probabilities):
-            n, state = carry
-            probabilities = state_probabilities(state)
-            state+= runge_kutta_step(n, state)
-            return (n + 1, state), probabilities
-        _, probabilities = jax.lax.scan(runge_kutta_step_scan, (0, state), jnp.zeros((N,2)))
+            n, y = carry
+            probabilities = state_probabilities(y)
+            y+= runge_kutta_step(n * dt, y, dt, rhs)
+            return (n + 1, y), probabilities
+        _, probabilities = jax.lax.scan(runge_kutta_step_scan, (0, y0), jnp.zeros((N,2)))
         return probabilities
 
 5. Solve using the custom function
@@ -216,7 +217,7 @@ First, solve with NumPy:
 
     init_state = np.array([1. + 0j,0. + 0j])
 
-    probabilities = unp.array(unp.runge_kutta(init_state, N))
+    probabilities = unp.array(unp.runge_kutta(init_state, dt, N, rhs))
 
     T = np.linspace(0,(N-1) * dt,N)
     plt.plot(T, probabilities, label = ["0", "1"])
@@ -227,7 +228,7 @@ First, solve with NumPy:
 
 .. jupyter-execute::
 
-    %timeit unp.array(unp.runge_kutta(init_state, N))
+    %timeit unp.array(unp.runge_kutta(init_state, dt, N, rhs))
 
 
 Second case is JAX:
@@ -235,7 +236,7 @@ Second case is JAX:
 .. jupyter-execute::
 
     init_state = jnp.array([1. + 0j,0. + 0j])
-    probabilities = unp.array(unp.runge_kutta(init_state, N))
+    probabilities = unp.array(unp.runge_kutta(init_state, dt, N, rhs))
 
     T = np.linspace(0,(N-1) * dt,N)
 
@@ -251,11 +252,11 @@ Lastly, we verify that the function ``unp.runge_kutta`` behaves as expected unde
 
     from functools import partial
 
-    @partial(jax.jit, static_argnums=(1,))
-    def solve_with_RungeKutta_jit(init_state, N):
-        return unp.array(unp.runge_kutta(init_state, N))
+    @partial(jax.jit, static_argnums=(2,3))
+    def solve_with_RungeKutta_jit(y, dt, N, rhs):
+        return unp.array(unp.runge_kutta(y, dt, N, rhs))
 
 .. jupyter-execute::
 
-    %timeit solve_with_RungeKutta_jit(init_state, N)
+    %timeit solve_with_RungeKutta_jit(init_state, dt, N, rhs)
 

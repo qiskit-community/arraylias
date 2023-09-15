@@ -178,7 +178,7 @@ We define the Runge-Kutta method to be used later here:
         return (k1 + 2*k2 + 2*k3 + k4) / 6.
 
 
-In Numpy case, we define the function ``runge_kutta`` for Numpy.
+First, define the version of the solver written for use with standard NumPy, and register it to our ``alias`` instance to act on NumPy arrays using ``alias.register_function``:
 
 .. jupyter-execute::
 

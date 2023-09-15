@@ -47,11 +47,7 @@ Here, we import the necesary libraries.
     N = 1001
 
 
-The :func:`.numpy_alias` function returns a pre-registered :class:`.Alias` instance with modules such as 
-`NumPy <https://numpy.org/>`_, `JAX <https://github.com/google/jax>`_, and `Tensorflow <https://www.tensorflow.org/>`_,
-setting a bridge between these libraries.
-
-We initialize Arraylias using the :func:`.numpy_alias` function and :class:`.Alias`.
+Initialize the default NumPy alias.
 
 .. jupyter-execute::
 

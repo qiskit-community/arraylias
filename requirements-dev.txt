@@ -10,6 +10,11 @@ reno>=3.4.0
 numpy
 scipy
 
+# The following line is needed until
+# https://github.com/jupyter/jupyter-sphinx/pull/226 is resolved.
+ipykernel>=4.5.1
+matplotlib>=3.3.0
+
 # JAX not on Windows
 jax; sys_platform == 'darwin' or sys_platform == 'linux'
 jaxlib; sys_platform == 'darwin' or sys_platform == 'linux'

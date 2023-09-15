@@ -64,7 +64,7 @@ We initialize Arraylias using the :func:`.numpy_alias` function and :class:`.Ali
 We solve the Schrödinger equation using the Runge-Kutta method in this tutorial.
 The Schrödinger equation is written as
 
-.. math:: \frac{\partial\psi}{\partial t} = -i * H \psi
+.. math:: \psi'(t) = -i * H(t) \psi(t)
 
 The equation we are solving represents a qubit's state as a two-level system. The Hamiltonian is
 

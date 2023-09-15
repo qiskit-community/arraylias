@@ -69,7 +69,7 @@ We will solve a common model for a two-level quantum system, which has Hamiltoni
 
 where :math:`\{X,Y,Z\}` are the Pauli matrices, and :math:`\nu_z`, :math:`\nu_x`, and :math:`\nu_d` are model parameters of the system.
 
-We can express the right-hand side (RHS) function of this equation as follows:
+Write a function representing the right-hand side of the Schrodinger equation with the above Hamiltonian.
 
 .. jupyter-execute::
 

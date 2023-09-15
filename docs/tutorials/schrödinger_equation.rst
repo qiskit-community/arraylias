@@ -255,7 +255,7 @@ Second case is JAX:
     plt.legend()
     plt.show()
 
-We see if we can actually jit the custom solver.
+Lastly, we verify that the function ``unp.runge_kutta`` behaves as expected under JAX transformations.
 
 .. jupyter-execute::
 

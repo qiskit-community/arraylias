@@ -40,6 +40,8 @@ Here, we import the necesary libraries.
     import matplotlib.pyplot as plt
     import jax
     import jax.numpy as jnp
+    jax.config.update("jax_enable_x64", True)
+    jax.config.update("jax_platform_name", "cpu")
 
     from scipy.integrate import solve_ivp
     from jax.experimental.ode import odeint
@@ -55,6 +57,7 @@ Initialize the default NumPy alias.
 
     alias = numpy_alias()
     unp = alias()
+
 
 2. Define the equation using :class:`.Alias`
 --------------------------------------------

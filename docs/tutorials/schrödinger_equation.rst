@@ -13,15 +13,15 @@ In addition, we will show how to add new dispatched function to :class:`.Alias` 
 
 In this section, we will go through the following steps:
 
-1. Import the required libraries and initialize the numpy alias.
-2. Define the equation using :class:`.Alias`.
-3. Solve the right-hand side function using existing solvers.
-4. Register custom solvers using :meth:`.Alias.register_function` method.
-5. Solve using the custom function.
+1. Import the required libraries and initialize the default NumPy alias.
+2. Define a function for evaluating the right-hand side of the Schrodinger equation using using the default NumPy alias.
+3. Solve the Schrodinger equation using the right-hand side function and existing NumPy-based and JAX-based solvers.
+4. Register new dispatched custom solvers using :meth:`.Alias.register_function` method.
+5. Solve the Schrodinger equation using the custom solvers.
 
 
-1. Import the required libraries and initialize the numpy alias
----------------------------------------------------------------
+1. Import the required libraries and initialize the default NumPy alias
+-----------------------------------------------------------------------
 
 Here, we import the necessary libraries.
 
@@ -61,8 +61,8 @@ Initialize the default NumPy alias.
     unp = alias()
 
 
-2. Define the equation using :class:`.Alias`
---------------------------------------------
+2. Define a function for evaluating the right-hand side of the Schrodinger equation using using the default NumPy alias
+-----------------------------------------------------------------------------------------------------------------------
 
 We solve the Schrödinger equation using the Runge-Kutta method in this tutorial.
 The Schrödinger equation is the differential equation
@@ -108,8 +108,8 @@ Define a function for computing the probability of observing the system in a giv
     def state_probabilities(state):
         return unp.abs(state) ** 2
 
-3. Solve the right-hand side function using existing solvers
-------------------------------------------------------------
+3. Solve the Schrodinger equation using the right-hand side function and existing NumPy-based and JAX-based solvers
+-------------------------------------------------------------------------------------------------------------------
 
 Here we show how the rhs function can be passed to numerical ODE solvers in both SciPy and JAX as if the function had been natively written in either library.
 
@@ -158,8 +158,8 @@ Second, we solve the equation by using Jax.array as the input and ``jax.experime
 
 
 
-4. Register custom solvers using :meth:`.Alias.register_function`
------------------------------------------------------------------
+4. Register new dispatched custom solvers using :meth:`.Alias.register_function` method
+---------------------------------------------------------------------------------------
 
 In this section, we define custom functions for solving differential equations in both NumPy and JAX, and register them to our instance of the NumPy alias.
 
@@ -215,8 +215,8 @@ Next, register a version of the solver to work on JAX arrays. For better behavio
         _, probabilities = jax.lax.scan(runge_kutta_step_scan, (0, y0), jnp.zeros((N, 2)))
         return probabilities
 
-5. Solve using the custom function
-----------------------------------
+5. Solve the Schrodinger equation using the custom solvers
+----------------------------------------------------------
 
 Finally, we will solve the Schrödinger equation using both the NumPy and JAX libraries via our single dispatched function ``unp.runge_kutta``.
 

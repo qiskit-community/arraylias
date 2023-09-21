@@ -101,7 +101,7 @@ Depending on the input type, the `rhs` function will execute using either NumPy 
     # Jax.numpy input
     rhs(jnp.array(0.1), jnp.array([0.0, 1.0]))
 
-We eventually want to find the probability of existence of this qubit state, so we will prepare the following function.
+Define a function for computing the probability of observing the system in a given state to be used throughout the tutorial:
 
 .. jupyter-execute::
 

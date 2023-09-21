@@ -88,7 +88,7 @@ Write a function representing the right-hand side of the Schrodinger equation wi
     def rhs(t, y):
         return unp.matmul(-1j * (5 * Z - unp.cos(10 * t) * X), y)
 
-We can confirm that the rhs function outputs the type corresponding to the input type.
+Depending on the input type, the `rhs` function will execute using either NumPy or JAX, which we can confirm by observing the output types:
 
 .. jupyter-execute::
 

@@ -29,7 +29,8 @@ Here, we import the necesary libraries.
     :hide-code:
 
     import warnings
-    warnings.filterwarnings('ignore')
+
+    warnings.filterwarnings("ignore")
 
 
 
@@ -40,6 +41,7 @@ Here, we import the necesary libraries.
     import matplotlib.pyplot as plt
     import jax
     import jax.numpy as jnp
+
     jax.config.update("jax_enable_x64", True)
     jax.config.update("jax_platform_name", "cpu")
 
@@ -79,24 +81,25 @@ Write a function representing the right-hand side of the Schrodinger equation wi
 
 .. jupyter-execute::
 
-    Z = np.array([[1,0],[0,-1]])
-    X = np.array([[0,1],[1,0]])
+    Z = np.array([[1, 0], [0, -1]])
+    X = np.array([[0, 1], [1, 0]])
 
-    def rhs(t,y):
-        return unp.matmul(-1j * (5 * Z -  unp.cos(10 * t) * X ), y)
+
+    def rhs(t, y):
+        return unp.matmul(-1j * (5 * Z - unp.cos(10 * t) * X), y)
 
 We can confirm that the rhs function outputs the type corresponding to the input type.
 
 .. jupyter-execute::
 
     # Numpy input
-    rhs(0.1, np.array([0., 1.]))
+    rhs(0.1, np.array([0.0, 1.0]))
 
 
 .. jupyter-execute::
 
     # Jax.numpy input
-    rhs(jnp.array(0.1), jnp.array([0., 1.]))
+    rhs(jnp.array(0.1), jnp.array([0.0, 1.0]))
 
 We eventually want to find the probability of existence of this qubit state, so we will prepare the following function.
 
@@ -115,22 +118,22 @@ We define the initial state, the time span for the simulation, and time point we
 
 .. jupyter-execute::
 
-    init_state = np.array([1. + 0j,0. + 0j])
+    init_state = np.array([1.0 + 0j, 0.0 + 0j])
 
-    t_span = [0,(N-1) * dt]
-    T = np.linspace(0,(N-1) * dt,N)
+    t_span = [0, (N - 1) * dt]
+    T = np.linspace(0, (N - 1) * dt, N)
 
 We solve by using ``scipy.integrate.solve_ivp`` and plot the probabilities of each state.
 
 .. jupyter-execute::
 
-    sol = solve_ivp(rhs,t_span,init_state,method='RK45',t_eval=T)
+    sol = solve_ivp(rhs, t_span, init_state, method="RK45", t_eval=T)
     probabilities = state_probabilities(sol.y)
 
     plt.plot(sol.t, probabilities[0], label="0")
     plt.plot(sol.t, probabilities[1], label="1")
-    plt.xlabel('T')
-    plt.ylabel('Probability')
+    plt.xlabel("T")
+    plt.ylabel("Probability")
     plt.legend()
     plt.show()
 
@@ -139,17 +142,17 @@ Second, we solve the equation by using Jax.array as the input and ``jax.experime
 
 .. jupyter-execute::
 
-    init_state = jnp.array([1. + 0j,0. + 0j])
+    init_state = jnp.array([1.0 + 0j, 0.0 + 0j])
 
-    t_span = [0,(N-1) * dt]
-    T = jnp.linspace(0,(N-1) * dt,N)
+    t_span = [0, (N - 1) * dt]
+    T = jnp.linspace(0, (N - 1) * dt, N)
 
-    sol = odeint(lambda y,t: rhs(t,y), init_state, T)
+    sol = odeint(lambda y, t: rhs(t, y), init_state, T)
     probabilities = state_probabilities(sol.T)
     plt.plot(T, probabilities[0], label="0")
     plt.plot(T, probabilities[1], label="1")
-    plt.xlabel('T')
-    plt.ylabel('Probability')
+    plt.xlabel("T")
+    plt.ylabel("Probability")
     plt.legend()
     plt.show()
 
@@ -178,10 +181,10 @@ We define the Runge-Kutta method to be used later here:
 
     def runge_kutta_step(t, y, dt, rhs):
         k1 = dt * rhs(t, y)
-        k2 = dt * rhs(t + 0.5 * dt, y + 0.5*k1)
-        k3 = dt * rhs(t + 0.5 * dt, y + 0.5*k2)
+        k2 = dt * rhs(t + 0.5 * dt, y + 0.5 * k1)
+        k3 = dt * rhs(t + 0.5 * dt, y + 0.5 * k2)
         k4 = dt * rhs(t + dt, y + k3)
-        return (k1 + 2*k2 + 2*k3 + k4) / 6.
+        return (k1 + 2 * k2 + 2 * k3 + k4) / 6.0
 
 
 First, define the version of the solver written for use with standard NumPy, and register it to our ``alias`` instance to act on NumPy arrays using ``alias.register_function``:
@@ -193,7 +196,7 @@ First, define the version of the solver written for use with standard NumPy, and
         probabilities = []
         for n in range(N):
             probabilities.append(state_probabilities(y0))
-            y0+= runge_kutta_step(n * dt, y0, dt, rhs)
+            y0 += runge_kutta_step(n * dt, y0, dt, rhs)
         return probabilities
 
 
@@ -206,9 +209,10 @@ Next, register a version of the solver to work on JAX arrays. For better behavio
         def runge_kutta_step_scan(carry, probabilities):
             n, y = carry
             probabilities = state_probabilities(y)
-            y+= runge_kutta_step(n * dt, y, dt, rhs)
+            y += runge_kutta_step(n * dt, y, dt, rhs)
             return (n + 1, y), probabilities
-        _, probabilities = jax.lax.scan(runge_kutta_step_scan, (0, y0), jnp.zeros((N,2)))
+
+        _, probabilities = jax.lax.scan(runge_kutta_step_scan, (0, y0), jnp.zeros((N, 2)))
         return probabilities
 
 5. Solve using the custom function
@@ -220,14 +224,14 @@ First, solve with NumPy:
 
 .. jupyter-execute::
 
-    init_state = np.array([1. + 0j,0. + 0j])
+    init_state = np.array([1.0 + 0j, 0.0 + 0j])
 
     probabilities = unp.array(unp.runge_kutta(init_state, dt, N, rhs))
 
-    T = np.linspace(0,(N-1) * dt,N)
-    plt.plot(T, probabilities, label = ["0", "1"])
-    plt.xlabel('T')
-    plt.ylabel('Probability')
+    T = np.linspace(0, (N - 1) * dt, N)
+    plt.plot(T, probabilities, label=["0", "1"])
+    plt.xlabel("T")
+    plt.ylabel("Probability")
     plt.legend()
     plt.show()
 
@@ -240,14 +244,14 @@ Second case is JAX:
 
 .. jupyter-execute::
 
-    init_state = jnp.array([1. + 0j,0. + 0j])
+    init_state = jnp.array([1.0 + 0j, 0.0 + 0j])
     probabilities = unp.array(unp.runge_kutta(init_state, dt, N, rhs))
 
-    T = np.linspace(0,(N-1) * dt,N)
+    T = np.linspace(0, (N - 1) * dt, N)
 
     plt.plot(T, probabilities, label=["0", "1"])
-    plt.xlabel('T')
-    plt.ylabel('Probability')
+    plt.xlabel("T")
+    plt.ylabel("Probability")
     plt.legend()
     plt.show()
 
@@ -257,7 +261,8 @@ Lastly, we verify that the function ``unp.runge_kutta`` behaves as expected unde
 
     from functools import partial
 
-    @partial(jax.jit, static_argnums=(2,3))
+
+    @partial(jax.jit, static_argnums=(2, 3))
     def solve_with_RungeKutta_jit(y, dt, N, rhs):
         return unp.array(unp.runge_kutta(y, dt, N, rhs))
 

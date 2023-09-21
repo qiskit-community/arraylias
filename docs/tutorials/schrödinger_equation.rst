@@ -175,7 +175,7 @@ We will use the 4th order Runge-Kutta method, whose single step formula is:
 
 where :math:`y_{n}`, :math:`t_{n}`, and :math:`h` are current solution, current time, and time step size, respectively.
 
-We define the Runge-Kutta method to be used later here:
+Define a function for taking a single Runge-Kutta step:
 
 .. jupyter-execute::
 

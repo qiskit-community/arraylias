@@ -8,7 +8,7 @@ Solving the Schrodinger equation with either NumPy or JAX using the default NumP
 
 In this tutorial, we will learn how to write generic code with examples of numerical computation by using 
 `NumPy <https://numpy.org/>`_ and `JAX <https://github.com/google/jax>`_.
-We'll use a code example that employs the Runge-Kutta method to numerically simulate the matrix evolution of the Schrödinger equation.
+We'll use a code example that employs the Runge-Kutta method to numerically simulate the matrix evolution of the Schrodinger equation.
 In addition, we will show how to add new dispatched function to :class:`.Alias` instance using :meth:`.Alias.register_function`.
 
 In this section, we will go through the following steps:
@@ -64,8 +64,8 @@ Initialize the default NumPy alias.
 2. Define a function for evaluating the right-hand side of the Schrodinger equation using using the default NumPy alias
 -----------------------------------------------------------------------------------------------------------------------
 
-We solve the Schrödinger equation using the Runge-Kutta method in this tutorial.
-The Schrödinger equation is the differential equation
+We solve the Schrodinger equation using the Runge-Kutta method in this tutorial.
+The Schrodinger equation is the differential equation
 
 .. math:: \psi'(t) = -i * H(t) \psi(t),
 
@@ -218,7 +218,7 @@ Next, register a version of the solver to work on JAX arrays. For better behavio
 5. Solve the Schrodinger equation using the custom solvers
 ----------------------------------------------------------
 
-Finally, we will solve the Schrödinger equation using both the NumPy and JAX libraries via our single dispatched function ``unp.runge_kutta``.
+Finally, we will solve the Schrodinger equation using both the NumPy and JAX libraries via our single dispatched function ``unp.runge_kutta``.
 
 First, solve with NumPy:
 

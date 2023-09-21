@@ -23,7 +23,7 @@ In this section, we will go through the following steps:
 1. Import the required libraries and initialize the numpy alias
 ---------------------------------------------------------------
 
-Here, we import the necesary libraries.
+Here, we import the necessary libraries.
 
 .. jupyter-execute::
     :hide-code:

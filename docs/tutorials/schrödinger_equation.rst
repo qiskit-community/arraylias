@@ -173,7 +173,7 @@ We will use the 4th order Runge-Kutta method, whose single step formula is:
     k_4 &= h \cdot f(t_n + h, y_n + k_3) \\
     y_{n+1} &= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)
 
-, where :math:`y_{n}`, :math:`t_{n}`, and :math:`h` are current solution, current time, and time step size, respectively.
+where :math:`y_{n}`, :math:`t_{n}`, and :math:`h` are current solution, current time, and time step size, respectively.
 
 We define the Runge-Kutta method to be used later here:
 

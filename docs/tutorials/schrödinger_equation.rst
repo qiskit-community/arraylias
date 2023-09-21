@@ -14,7 +14,7 @@ In addition, we will show how to add new dispatched function to :class:`.Alias` 
 In this section, we will go through the following steps:
 
 1. Import the required libraries and initialize the default NumPy alias.
-2. Define a function for evaluating the right-hand side of the Schrodinger equation using using the default NumPy alias.
+2. Define a function for evaluating the right-hand side of the Schrodinger equation using the default NumPy alias.
 3. Solve the Schrodinger equation using the right-hand side function and existing NumPy-based and JAX-based solvers.
 4. Register new dispatched custom solvers using :meth:`.Alias.register_function` method.
 5. Solve the Schrodinger equation using the custom solvers.
@@ -61,8 +61,8 @@ Initialize the default NumPy alias.
     unp = alias()
 
 
-2. Define a function for evaluating the right-hand side of the Schrodinger equation using using the default NumPy alias
------------------------------------------------------------------------------------------------------------------------
+2. Define a function for evaluating the right-hand side of the Schrodinger equation using the default NumPy alias
+-----------------------------------------------------------------------------------------------------------------
 
 We solve the Schrodinger equation using the Runge-Kutta method in this tutorial.
 The Schrodinger equation is the differential equation
@@ -111,9 +111,10 @@ Define a function for computing the probability of observing the system in a giv
 3. Solve the Schrodinger equation using the right-hand side function and existing NumPy-based and JAX-based solvers
 -------------------------------------------------------------------------------------------------------------------
 
-Here we show how the rhs function can be passed to numerical ODE solvers in both SciPy and JAX as if the function had been natively written in either library.
+Here we show how the `rhs` function can be passed to numerical ODE solvers in both SciPy and JAX as
+if the function had been natively written in either library.
 
-First, we solve the equation by using Numpy as the input and ``scipy.integrate.solve_ivp`` as a solver.
+First, we solve the equation by using NumPy as the input and ``scipy.integrate.solve_ivp`` as a solver.
 We define the initial state, the time span for the simulation, and time point we want to simulate.
 
 .. jupyter-execute::

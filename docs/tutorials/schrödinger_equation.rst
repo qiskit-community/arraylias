@@ -9,7 +9,7 @@ Solving the Schrodinger equation with either NumPy or JAX using the default NumP
 In this tutorial, we will learn how to write generic code with examples of numerical computation by using 
 `NumPy <https://numpy.org/>`_ and `JAX <https://github.com/google/jax>`_.
 We'll use a code example that employs the Runge-Kutta method to numerically simulate the matrix evolution of the Schrödinger equation.
-In addition, we will showcase the utility of :meth:`.Alias.register_function` method for efficient problem-solving.
+In addition, we will show how to add new dispatched function to :class:`.Alias` instance using :meth:`.Alias.register_function`.
 
 In this section, we will go through the following steps:
 

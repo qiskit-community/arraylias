@@ -9,15 +9,15 @@ aliased module for each underlying type library. When using the aliased module, 
 automatically dispatched to version of the function for the correct library based on the type of the
 first argument.
 
-Arraylias contains default pre-built aliased versions of both
-[NumPy](https://github.com/numpy/numpy) and [Scipy](https://github.com/scipy/scipy), with additional
-registration of the [JAX](https://github.com/google/jax) and
-[Tensorflow](https://github.com/tensorflow) array libraries. This enables writing
-[NumPy](https://github.com/numpy/numpy) and [Scipy](https://github.com/scipy/scipy) like code that
-will that will execute on [NumPy](https://github.com/numpy/numpy),
-[JAX](https://github.com/google/jax), and [Tensorflow](https://github.com/tensorflow) array objects
-as if it had been written in the respective native libraries. If necessary, these default aliases
-can be further extended to fit the needs of the application.
+Arraylias contains default pre-built aliased versions of both 
+`NumPy <https://github.com/numpy/numpy>`_ and `SciPy <https://github.com/scipy/scipy>`_, with
+additional registration of the `JAX <https://github.com/google/jax>`_ and 
+`Tensorflow <https://github.com/tensorflow>`_ array libraries. This enables writing `NumPy
+<https://github.com/numpy/numpy>`_ and `SciPy <https://github.com/scipy/scipy>`_ like code that will
+that will execute on `NumPy <https://github.com/numpy/numpy>`_,
+`JAX <https://github.com/google/jax>`_, and `Tensorflow <https://github.com/tensorflow>`_ array
+objects as if it had been written in the respective native libraries. If necessary, these default
+aliases can be further extended to fit the needs of the application.
 
 .. warning::
 

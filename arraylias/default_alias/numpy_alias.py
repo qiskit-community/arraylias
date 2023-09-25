@@ -18,7 +18,7 @@ from .register_tensorflow import register_tensorflow_numpy
 
 
 def numpy_alias(register_numbers=True) -> Alias:
-    """Return a pre-configured Alias with numpy like syntax.
+    """Return a pre-configured Alias with NumPy like syntax.
 
     This includes registered libs ``numpy``, ``jax``, and ``tensorflow``
     if the respective packages are installed.

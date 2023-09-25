@@ -6,7 +6,7 @@
 Arraylias User Guide
 ====================
 
-The main class of the *arraylias* package is the :class:`.Alias` class.
+The main class of the Arraylias package is the :class:`.Alias` class.
 This is used to build an aliased module structure for 1 or more
 libraries and write generic code that can automatically dispatch to
 the appropriate function in one of those libraries based on the type
@@ -20,7 +20,7 @@ Default NumPy and SciPy Aliases
 ===============================
 
 The simplest way to use Arraylias is to use the :func:`.numpy_alias`
-and :func:`scipy_alias` functions to return a pre-configured
+and :func:`.scipy_alias` functions to return a pre-configured
 :class:`.Alias` with NumPy module or SciPy module syntax respectively.
 
 If the appropriate Python libraries are installed on the system

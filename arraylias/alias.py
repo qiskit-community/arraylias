@@ -80,7 +80,7 @@ def method_lru_cache(maxsize: Optional[int] = 128, typed: bool = False) -> Calla
 class Alias:
     """Library aliasing class.
 
-    This class aliasing of multiple libraries and uses a single-dispatch
+    This class enables aliasing of multiple libraries and uses a single-dispatch
     mechanism to dispatch to the correct library function based on the
     type of the first function argument.
 

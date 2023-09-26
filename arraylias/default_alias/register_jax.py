@@ -55,7 +55,7 @@ def register_jax_numpy(alias):
         alias.register_module(jax.numpy, lib="jax")
 
         # Jax doesn't implement a copy method, so we add one using the
-        # jax numpy.array constructor which implicitly copies
+        # jax.numpy array constructor which implicitly copies
         # pylint: disable=unused-variable
         @alias.register_function(lib="jax")
         def copy(array, order="K"):

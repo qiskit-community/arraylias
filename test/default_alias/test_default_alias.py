@@ -116,7 +116,7 @@ class TestNumpyAlias(NumpyBase):
 
 
 class TestJaxAlias(JaxBase, TestNumpyAlias):
-    """Test outputs when the inputs are jax numpy array of numpy_alias."""
+    """Test outputs when the inputs are jax.numpy array of numpy_alias."""
 
     def test_direct_jit(self):
         """Test jit directly on dispatched function."""

@@ -20,7 +20,7 @@ def register_tensorflow_numpy(alias):
         alias (Alias): The alias dispatcher to register with.
 
     Returns:
-        bool: True if Tensorflow is installed and was successfully registered.
+        bool: ``True`` if Tensorflow is installed and was successfully registered.
     """
     try:
         import tensorflow as tf

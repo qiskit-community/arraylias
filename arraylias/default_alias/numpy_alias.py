@@ -29,7 +29,7 @@ def numpy_alias(register_numbers=True) -> Alias:
             (Default: True).
 
     Returns:
-        A numpy-syntax :class:`.Alias`.
+        A NumPy-syntax :class:`.Alias`.
     """
     alias = Alias()
     register_numpy(alias, register_numbers=register_numbers)

@@ -40,7 +40,7 @@ class NumpyBase(unittest.TestCase):
             arr (list): The input array of List.
 
         Returns:
-            Numpy.array converted from the input
+            Numpy.array converted from the input.
         """
         return np.array(arr)
 
@@ -66,7 +66,7 @@ class JaxBase(unittest.TestCase):
             arr (list): The input array of List.
 
         Returns:
-            Jax.numpy.array converted from the input
+            Jax.numpy.array converted from the input.
         """
         return jnp.array(arr)
 
@@ -89,7 +89,7 @@ class TensorflowBase(unittest.TestCase):
             arr (list): The input array of List.
 
         Returns:
-            Tensorflow.Tensor converted from the input
+            Tensorflow.Tensor converted from the input.
         """
         return tf.constant(arr)
 

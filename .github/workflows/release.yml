@@ -22,9 +22,9 @@ jobs:
         shell: bash
       - uses: actions/upload-artifact@v3
         with:
-          path: ./dist/qiskit*
+          path: ./dist/arraylias*
       - name: Publish to PyPi
         env:
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
           TWINE_USERNAME: qiskit
-        run: twine upload dist/qiskit*
+        run: twine upload dist/arraylias*

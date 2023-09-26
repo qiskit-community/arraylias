@@ -139,7 +139,7 @@ We solve by using ``scipy.integrate.solve_ivp`` and plot the probabilities of ea
     plt.show()
 
 
-Second, we solve the equation by using Jax.array as the input and ``jax.experimental.ode.odeint`` as a solver.
+Second, we solve the equation by using jax.numpy.array as the input and ``jax.experimental.ode.odeint`` as a solver.
 
 .. jupyter-execute::
 

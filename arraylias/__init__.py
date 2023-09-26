@@ -17,21 +17,13 @@ Arraylias (:mod:`arraylias`)
 
 .. currentmodule:: arraylias
 
-This module contains a common interface for working with array types from
-multiple array libraries.
+This module contains general tools for building aliased libraries, as well as default aliases for
+NumPy and SciPy that provide a common interface for working with multiple underlying array
+libraries.
 
 
-Functions
-=========
-.. autosummary::
-    :toctree: ../stubs/
-
-    numpy_alias
-    scipy_alias
-
-
-Classes
-=======
+Classes for building aliased libraries
+======================================
 
 .. autosummary::
     :toctree: ../stubs/
@@ -41,6 +33,17 @@ Classes
     AliasedPath
     AliasError
     LibraryError
+
+
+Constructors for default NumPy and SciPy aliases
+================================================
+
+.. autosummary::
+    :toctree: ../stubs/
+
+    numpy_alias
+    scipy_alias
+
 """
 from arraylias.version import __version__
 from arraylias.alias import Alias

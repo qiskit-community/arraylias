@@ -18,18 +18,18 @@ from .register_tensorflow import register_tensorflow_numpy
 
 
 def numpy_alias(register_numbers=True) -> Alias:
-    """Return a pre-configured Alias with numpy like syntax.
+    """Return a pre-configured Alias with NumPy like syntax.
 
     This includes registered libs ``numpy``, ``jax``, and ``tensorflow``
     if the respective packages are installed.
 
     Args:
         register_numbers (bool): If ``True`` register python scalar number types
-            ``int``, ``float``, and ``complex`` as NumPy array types for aliasing
+            ``int``, ``float``, and ``complex`` as ``numpy`` array types for aliasing
             (Default: True).
 
     Returns:
-        A numpy-syntax :class:`.Alias`.
+        A NumPy-syntax :class:`.Alias`.
     """
     alias = Alias()
     register_numpy(alias, register_numbers=register_numbers)

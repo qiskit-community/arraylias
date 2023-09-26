@@ -14,13 +14,13 @@
 
 
 def register_tensorflow_numpy(alias):
-    """Register tensorflow.numpy if TensorFlow is installed.
+    """Register tensorflow.numpy if Tensorflow is installed.
 
     Args:
         alias (Alias): The alias dispatcher to register with.
 
     Returns:
-        bool: True if tensorflow is installed and was successfully registered.
+        bool: ``True`` if Tensorflow is installed and was successfully registered.
     """
     try:
         import tensorflow as tf
@@ -36,13 +36,13 @@ def register_tensorflow_numpy(alias):
 
 
 def register_tensorflow_scipy(alias):
-    """Register tensorflow.scipy.linalg if TensorFlow is installed.
+    """Register tensorflow.scipy.linalg if Tensorflow is installed.
 
     Args:
         alias (Alias): The alias dispatcher to register with.
 
     Returns:
-        bool: ``True`` if TensorFlow is installed and was successfully registered, otherwise
+        bool: ``True`` if Tensorflow is installed and was successfully registered, otherwise
         ``False``.
     """
     try:

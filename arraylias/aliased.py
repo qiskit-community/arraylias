@@ -22,7 +22,7 @@ class AliasedModule:
     """Aliased library module.
 
     This is used to alias a module path for registered libraries of
-    an :class:.Alias`, and as the base module for automatic dispatch
+    an :class:`.Alias`, and as the base module for automatic dispatch
     of an :class:`.Alias`. Use attributes access submodules or
     functions within this aliased module.
     """
@@ -58,13 +58,13 @@ class AliasedPath(AliasedModule):
     """Aliased library path.
 
     This is used to alias an unspecified object that cannot be inferred
-    as a module or Callable until it is evaluated.
+    as a module or ``Callable`` until it is evaluated.
 
     If this aliases a function it should be used via call method to
     dispatch to the called function.
 
     If this aliases a module it should be used via get attribute to
-    return the AliasedPath to the specified sub module or module
+    return the :class:`.AliasedPath` to the specified sub module or module
     function.
     """
 

@@ -40,7 +40,7 @@ class NumpyBase(unittest.TestCase):
             arr (list): The input array of List.
 
         Returns:
-            Numpy.array converted from the input
+            Numpy.array converted from the input.
         """
         return np.array(arr)
 
@@ -66,7 +66,7 @@ class JaxBase(unittest.TestCase):
             arr (list): The input array of List.
 
         Returns:
-            Jax.numpy.array converted from the input
+            Jax.numpy.array converted from the input.
         """
         return jnp.array(arr)
 
@@ -89,7 +89,7 @@ class TensorflowBase(unittest.TestCase):
             arr (list): The input array of List.
 
         Returns:
-            Tensorflow.Tensor converted from the input
+            Tensorflow.Tensor converted from the input.
         """
         return tf.constant(arr)
 
@@ -116,7 +116,7 @@ class TestNumpyAlias(NumpyBase):
 
 
 class TestJaxAlias(JaxBase, TestNumpyAlias):
-    """Test outputs when the inputs are jax numpy array of numpy_alias."""
+    """Test outputs when the inputs are jax.numpy array of numpy_alias."""
 
     def test_direct_jit(self):
         """Test jit directly on dispatched function."""

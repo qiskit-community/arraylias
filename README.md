@@ -16,7 +16,7 @@ Arraylias contains default pre-built aliased versions of both
 registration of the [JAX](https://github.com/google/jax) and
 [Tensorflow](https://github.com/tensorflow) array libraries. This enables writing
 [NumPy](https://github.com/numpy/numpy) and [Scipy](https://github.com/scipy/scipy) like code that
-will that will execute on [NumPy](https://github.com/numpy/numpy),
+will execute on [NumPy](https://github.com/numpy/numpy),
 [JAX](https://github.com/google/jax), and [Tensorflow](https://github.com/tensorflow) array objects
 as if it had been written in the respective native libraries. If necessary, these default aliases
 can be further extended to fit the needs of the application.

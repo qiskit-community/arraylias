@@ -25,6 +25,6 @@ jobs:
         shell: bash
       - uses: actions/upload-artifact@v3
         with:
-          path: ./dist/qiskit*
+          path: ./dist/arraylias*
       - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1

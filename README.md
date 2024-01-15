@@ -21,10 +21,10 @@ will execute on [NumPy](https://github.com/numpy/numpy),
 as if it had been written in the respective native libraries. If necessary, these default aliases
 can be further extended to fit the needs of the application.
 
-Reference documentation may be found [here](https://www.qiskit.org/ecosystem/arraylias/), including
-[tutorials](https://qiskit.org/ecosystem/arraylias/tutorials/index.html),
-[user guide](https://qiskit.org/ecosystem/arraylias/userguide/index.html), and
-[API reference](https://qiskit.org/ecosystem/arraylias/apidocs/index.html).
+Reference documentation may be found [here](https://qiskit-extensions.github.io/arraylias/), including
+[tutorials](https://qiskit-extensions.github.io/arraylias/tutorials/index.html),
+[user guide](https://qiskit-extensions.github.io/arraylias/userguide/index.html), and
+[API reference](https://qiskit-extensions.github.io/arraylias/apidocs/index.html).
 
 ## Installation
 

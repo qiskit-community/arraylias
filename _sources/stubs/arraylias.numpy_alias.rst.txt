@@ -1,0 +1,6 @@
+﻿arraylias.numpy\_alias
+======================
+
+.. currentmodule:: arraylias
+
+.. autofunction:: numpy_alias

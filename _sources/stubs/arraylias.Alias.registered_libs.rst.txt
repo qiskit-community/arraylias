@@ -1,0 +1,6 @@
+arraylias.Alias.registered\_libs
+================================
+
+.. currentmodule:: arraylias
+
+.. automethod:: Alias.registered_libs

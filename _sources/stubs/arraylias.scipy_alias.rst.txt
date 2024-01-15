@@ -1,0 +1,6 @@
+﻿arraylias.scipy\_alias
+======================
+
+.. currentmodule:: arraylias
+
+.. autofunction:: scipy_alias

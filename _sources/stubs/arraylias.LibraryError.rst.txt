@@ -1,0 +1,6 @@
+﻿arraylias.LibraryError
+======================
+
+.. currentmodule:: arraylias
+
+.. autoexception:: LibraryError

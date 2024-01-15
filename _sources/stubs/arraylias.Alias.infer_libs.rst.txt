@@ -1,0 +1,6 @@
+arraylias.Alias.infer\_libs
+===========================
+
+.. currentmodule:: arraylias
+
+.. automethod:: Alias.infer_libs

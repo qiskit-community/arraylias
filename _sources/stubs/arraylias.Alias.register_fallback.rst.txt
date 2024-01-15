@@ -1,0 +1,6 @@
+arraylias.Alias.register\_fallback
+==================================
+
+.. currentmodule:: arraylias
+
+.. automethod:: Alias.register_fallback

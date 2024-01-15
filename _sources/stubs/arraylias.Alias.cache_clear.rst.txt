@@ -1,0 +1,6 @@
+arraylias.Alias.cache\_clear
+============================
+
+.. currentmodule:: arraylias
+
+.. automethod:: Alias.cache_clear

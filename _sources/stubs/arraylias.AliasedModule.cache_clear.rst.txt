@@ -1,0 +1,6 @@
+arraylias.AliasedModule.cache\_clear
+====================================
+
+.. currentmodule:: arraylias
+
+.. automethod:: AliasedModule.cache_clear

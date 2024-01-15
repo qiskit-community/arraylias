@@ -1,0 +1,18 @@
+﻿AliasedModule
+=============
+
+.. currentmodule:: arraylias
+
+.. autoclass:: AliasedModule
+   :no-members:
+   :show-inheritance:
+
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: ../stubs/
+
+      ~AliasedModule.cache_clear
+
+

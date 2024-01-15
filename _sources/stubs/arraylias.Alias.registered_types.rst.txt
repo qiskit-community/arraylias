@@ -1,0 +1,6 @@
+arraylias.Alias.registered\_types
+=================================
+
+.. currentmodule:: arraylias
+
+.. automethod:: Alias.registered_types

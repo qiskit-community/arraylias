@@ -1,0 +1,18 @@
+﻿AliasedPath
+===========
+
+.. currentmodule:: arraylias
+
+.. autoclass:: AliasedPath
+   :no-members:
+   :show-inheritance:
+
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: ../stubs/
+
+      ~AliasedPath.cache_clear
+
+

@@ -1,0 +1,6 @@
+arraylias.Alias.register\_module
+================================
+
+.. currentmodule:: arraylias
+
+.. automethod:: Alias.register_module

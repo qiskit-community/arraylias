@@ -1,0 +1,26 @@
+﻿Alias
+=====
+
+.. currentmodule:: arraylias
+
+.. autoclass:: Alias
+   :no-members:
+   :show-inheritance:
+
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+      :toctree: ../stubs/
+
+      ~Alias.cache_clear
+      ~Alias.infer_libs
+      ~Alias.register_default
+      ~Alias.register_fallback
+      ~Alias.register_function
+      ~Alias.register_module
+      ~Alias.register_type
+      ~Alias.registered_libs
+      ~Alias.registered_types
+
+

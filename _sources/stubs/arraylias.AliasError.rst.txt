@@ -1,0 +1,6 @@
+﻿arraylias.AliasError
+====================
+
+.. currentmodule:: arraylias
+
+.. autoexception:: AliasError

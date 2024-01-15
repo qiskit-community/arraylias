@@ -1,0 +1,6 @@
+arraylias.AliasedPath.cache\_clear
+==================================
+
+.. currentmodule:: arraylias
+
+.. automethod:: AliasedPath.cache_clear

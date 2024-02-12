@@ -64,7 +64,7 @@ setup(
     python_requires=">=3.7",
     project_urls={
         "Bug Tracker": "https://github.com/Qiskit/arraylias/issues",
-        "Documentation": "https://qiskit.org/documentation/",
+        "Documentation": "https://qiskit-extensions.github.io/arraylias/",
         "Source Code": "https://github.com/Qiskit/arraylias",
     },
     zip_safe=False

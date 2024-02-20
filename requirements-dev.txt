@@ -1,7 +1,7 @@
-black~=22.0
+astroid==2.14.2
+pylint==2.16.2
+black~=24.1
 stestr>=3.0.0
-astroid==2.9.3
-pylint==2.12.2
 qiskit-sphinx-theme~=1.16.0rc1
 sphinx-autodoc-typehints
 jupyter-sphinx
@@ -19,6 +19,6 @@ matplotlib>=3.3.0
 jax; sys_platform == 'darwin' or sys_platform == 'linux'
 jaxlib; sys_platform == 'darwin' or sys_platform == 'linux'
 
-# Tensorflow does not yet have a 3.11 version
-tensorflow; (sys_platform != 'darwin' or platform_machine != 'arm64') and python_version<'3.11'
-tensorflow-macos; sys_platform == 'darwin' and platform_machine == 'arm64' and python_version<'3.11'
+# Tensorflow does not yet have a 3.12 version
+tensorflow-cpu; (sys_platform != 'darwin' or platform_machine != 'arm64') and python_version<'3.12'
+tensorflow-macos; sys_platform == 'darwin' and platform_machine == 'arm64' and python_version<'3.12'

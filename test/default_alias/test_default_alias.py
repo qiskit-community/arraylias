@@ -163,8 +163,8 @@ class TestScipyAlias(NumpyBase):
         """
         w_usp, v_usp = usp.linalg.eigh(self.arr_2d)
         w, v = scipy.linalg.eigh(self.arr_2d)
-        self.assertTrue(usp.allclose(w, w_usp))
-        self.assertTrue(usp.allclose(v, v_usp))
+        self.assertTrue(unp.allclose(w, w_usp))
+        self.assertTrue(unp.allclose(v, v_usp))
 
 
 class TestJaxScipyAlias(JaxBase, TestScipyAlias):

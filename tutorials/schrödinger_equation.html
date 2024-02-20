@@ -5,8 +5,8 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Arraylias Tutorials" href="index.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.08.19 -->
-        <title>Solving the Schrodinger equation with either NumPy or JAX using the default NumPy alias - arraylias 0.1.0</title>
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.08.19 -->
+        <title>Solving the Schrodinger equation with either NumPy or JAX using the default NumPy alias - arraylias 0.1.1</title>
       <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=82a976d7" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/qiskit-sphinx-theme.css?v=fe84956c" />
@@ -200,7 +200,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">arraylias 0.1.0</div></a>
+      <a href="../index.html"><div class="brand">arraylias 0.1.1</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -227,7 +227,7 @@
     </div>
   </a>
   
-  <span class="sidebar-brand-text">arraylias 0.1.0</span>
+  <span class="sidebar-brand-text">arraylias 0.1.1</span>
 </div><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
@@ -299,8 +299,8 @@
           </label>
         </div>
         <article role="main">
-          <span class="target" id="module-rungekutta"><span id="rungekutta"></span></span><section id="solving-the-schrodinger-equation-with-either-numpy-or-jax-using-the-default-numpy-alias">
-<h1>Solving the Schrodinger equation with either NumPy or JAX using the default NumPy alias<a class="headerlink" href="#solving-the-schrodinger-equation-with-either-numpy-or-jax-using-the-default-numpy-alias" title="Permalink to this heading">#</a></h1>
+          <section id="solving-the-schrodinger-equation-with-either-numpy-or-jax-using-the-default-numpy-alias">
+<span id="module-rungekutta"></span><span id="rungekutta"></span><h1>Solving the Schrodinger equation with either NumPy or JAX using the default NumPy alias<a class="headerlink" href="#solving-the-schrodinger-equation-with-either-numpy-or-jax-using-the-default-numpy-alias" title="Link to this heading">#</a></h1>
 <p>In this tutorial, we will learn how to write generic code with examples of numerical computation by using
 <a class="reference external" href="https://numpy.org/">NumPy</a> and <a class="reference external" href="https://github.com/google/jax">JAX</a>.
 We’ll use a code example that employs the Runge-Kutta method to numerically simulate the matrix evolution of the Schrodinger equation.
@@ -314,7 +314,7 @@ In addition, we will show how to add new dispatched function to <a class="refere
 <li><p>Solve the Schrodinger equation using the custom solvers.</p></li>
 </ol>
 <section id="import-the-required-libraries-and-initialize-the-default-numpy-alias">
-<h2>1. Import the required libraries and initialize the default NumPy alias<a class="headerlink" href="#import-the-required-libraries-and-initialize-the-default-numpy-alias" title="Permalink to this heading">#</a></h2>
+<h2>1. Import the required libraries and initialize the default NumPy alias<a class="headerlink" href="#import-the-required-libraries-and-initialize-the-default-numpy-alias" title="Link to this heading">#</a></h2>
 <p>Here, we import the necessary libraries.</p>
 <div class="jupyter_cell docutils container">
 <div class="cell_output docutils container">
@@ -356,7 +356,7 @@ In addition, we will show how to add new dispatched function to <a class="refere
 </div>
 </section>
 <section id="define-a-function-for-evaluating-the-right-hand-side-of-the-schrodinger-equation-using-the-default-numpy-alias">
-<h2>2. Define a function for evaluating the right-hand side of the Schrodinger equation using the default NumPy alias<a class="headerlink" href="#define-a-function-for-evaluating-the-right-hand-side-of-the-schrodinger-equation-using-the-default-numpy-alias" title="Permalink to this heading">#</a></h2>
+<h2>2. Define a function for evaluating the right-hand side of the Schrodinger equation using the default NumPy alias<a class="headerlink" href="#define-a-function-for-evaluating-the-right-hand-side-of-the-schrodinger-equation-using-the-default-numpy-alias" title="Link to this heading">#</a></h2>
 <p>We solve the Schrodinger equation using the Runge-Kutta method in this tutorial.
 The Schrodinger equation is the differential equation</p>
 <div class="math-wrapper docutils container">
@@ -425,7 +425,7 @@ The Schrodinger equation is the differential equation</p>
 </div>
 </section>
 <section id="solve-the-schrodinger-equation-using-the-right-hand-side-function-and-existing-numpy-based-and-jax-based-solvers">
-<h2>3. Solve the Schrodinger equation using the right-hand side function and existing NumPy-based and JAX-based solvers<a class="headerlink" href="#solve-the-schrodinger-equation-using-the-right-hand-side-function-and-existing-numpy-based-and-jax-based-solvers" title="Permalink to this heading">#</a></h2>
+<h2>3. Solve the Schrodinger equation using the right-hand side function and existing NumPy-based and JAX-based solvers<a class="headerlink" href="#solve-the-schrodinger-equation-using-the-right-hand-side-function-and-existing-numpy-based-and-jax-based-solvers" title="Link to this heading">#</a></h2>
 <p>Here we show how the <cite>rhs</cite> function can be passed to numerical ODE solvers in both SciPy and JAX as
 if the function had been natively written in either library.</p>
 <p>First, we solve the equation by using NumPy as the input and <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code> as a solver.
@@ -486,7 +486,7 @@ We define the initial state, the time span for the simulation, and time point we
 </div>
 </section>
 <section id="register-new-dispatched-custom-solvers-using-alias-register-function-method">
-<h2>4. Register new dispatched custom solvers using <a class="reference internal" href="../stubs/arraylias.Alias.register_function.html#arraylias.Alias.register_function" title="arraylias.Alias.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_function()</span></code></a> method<a class="headerlink" href="#register-new-dispatched-custom-solvers-using-alias-register-function-method" title="Permalink to this heading">#</a></h2>
+<h2>4. Register new dispatched custom solvers using <a class="reference internal" href="../stubs/arraylias.Alias.register_function.html#arraylias.Alias.register_function" title="arraylias.Alias.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_function()</span></code></a> method<a class="headerlink" href="#register-new-dispatched-custom-solvers-using-alias-register-function-method" title="Link to this heading">#</a></h2>
 <p>In this section, we define custom functions for solving differential equations in both NumPy and JAX, and register them to our instance of the NumPy alias.</p>
 <p>We will use the 4th order Runge-Kutta method, whose single step formula is:</p>
 <div class="math-wrapper docutils container">
@@ -550,7 +550,7 @@ y_{n+1} &amp;= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)\end{split}\]</div>
 </div>
 </section>
 <section id="solve-the-schrodinger-equation-using-the-custom-solvers">
-<h2>5. Solve the Schrodinger equation using the custom solvers<a class="headerlink" href="#solve-the-schrodinger-equation-using-the-custom-solvers" title="Permalink to this heading">#</a></h2>
+<h2>5. Solve the Schrodinger equation using the custom solvers<a class="headerlink" href="#solve-the-schrodinger-equation-using-the-custom-solvers" title="Link to this heading">#</a></h2>
 <p>Finally, we will solve the Schrodinger equation using both the NumPy and JAX libraries via our single dispatched function <code class="docutils literal notranslate"><span class="pre">unp.runge_kutta</span></code>.</p>
 <p>First, solve with NumPy:</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -579,7 +579,7 @@ y_{n+1} &amp;= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)\end{split}\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>65 ms ± 187 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>66 ms ± 299 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -626,7 +626,7 @@ y_{n+1} &amp;= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)\end{split}\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>116 µs ± 2.53 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>118 µs ± 764 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -673,7 +673,7 @@ y_{n+1} &amp;= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)\end{split}\]</div>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on 2024/01/15</div>
+              Last updated on 2024/02/20</div>
           </div>
           <div class="right-details">
             
@@ -713,9 +713,9 @@ y_{n+1} &amp;= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)\end{split}\]</div>
   </div>
 </div><script src="../_static/jquery.js?v=5d32c60e"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2389946f"></script>
+    <script src="../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/qiskit-sphinx-theme.js?v=4d77b8ca"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>

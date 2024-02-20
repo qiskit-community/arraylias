@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.08.19 -->
-        <title>arraylias.alias - arraylias 0.1.0</title>
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.08.19 -->
+        <title>arraylias.alias - arraylias 0.1.1</title>
       <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=82a976d7" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/qiskit-sphinx-theme.css?v=fe84956c" />
@@ -200,7 +200,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">arraylias 0.1.0</div></a>
+      <a href="../../index.html"><div class="brand">arraylias 0.1.1</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -227,7 +227,7 @@
     </div>
   </a>
   
-  <span class="sidebar-brand-text">arraylias 0.1.0</span>
+  <span class="sidebar-brand-text">arraylias 0.1.1</span>
 </div><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
@@ -378,7 +378,9 @@
     <span class="k">return</span> <span class="n">cache_method_decorator</span>
 
 
-<div class="viewcode-block" id="Alias"><a class="viewcode-back" href="../../stubs/arraylias.Alias.html#arraylias.Alias">[docs]</a><span class="k">class</span> <span class="nc">Alias</span><span class="p">:</span>
+<div class="viewcode-block" id="Alias">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.html#arraylias.Alias">[docs]</a>
+<span class="k">class</span> <span class="nc">Alias</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Library aliasing class.</span>
 
 <span class="sd">    This class enables aliasing of multiple libraries and uses a single-dispatch</span>
@@ -454,17 +456,25 @@
             <span class="n">libs</span> <span class="o">=</span> <span class="n">_AUTOLIB</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dispatch</span><span class="p">(</span><span class="n">libs</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Alias.registered_libs"><a class="viewcode-back" href="../../stubs/arraylias.Alias.registered_libs.html#arraylias.Alias.registered_libs">[docs]</a>    <span class="nd">@method_lru_cache</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="viewcode-block" id="Alias.registered_libs">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.registered_libs.html#arraylias.Alias.registered_libs">[docs]</a>
+    <span class="nd">@method_lru_cache</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">registered_libs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all registered library names for dispatching.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_libs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Alias.registered_types"><a class="viewcode-back" href="../../stubs/arraylias.Alias.registered_types.html#arraylias.Alias.registered_types">[docs]</a>    <span class="nd">@method_lru_cache</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Alias.registered_types">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.registered_types.html#arraylias.Alias.registered_types">[docs]</a>
+    <span class="nd">@method_lru_cache</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">registered_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all registered types for dispatching.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_types</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Alias.register_function"><a class="viewcode-back" href="../../stubs/arraylias.Alias.register_function.html#arraylias.Alias.register_function">[docs]</a>    <span class="k">def</span> <span class="nf">register_function</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Alias.register_function">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.register_function.html#arraylias.Alias.register_function">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_function</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">lib</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -494,7 +504,10 @@
             <span class="k">return</span> <span class="n">decorator</span>
         <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Alias.register_fallback"><a class="viewcode-back" href="../../stubs/arraylias.Alias.register_fallback.html#arraylias.Alias.register_fallback">[docs]</a>    <span class="k">def</span> <span class="nf">register_fallback</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Alias.register_fallback">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.register_fallback.html#arraylias.Alias.register_fallback">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_fallback</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -519,7 +532,10 @@
             <span class="k">return</span> <span class="n">decorator</span>
         <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Alias.register_default"><a class="viewcode-back" href="../../stubs/arraylias.Alias.register_default.html#arraylias.Alias.register_default">[docs]</a>    <span class="k">def</span> <span class="nf">register_default</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Alias.register_default">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.register_default.html#arraylias.Alias.register_default">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_default</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -544,7 +560,10 @@
             <span class="k">return</span> <span class="n">decorator</span>
         <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Alias.register_module"><a class="viewcode-back" href="../../stubs/arraylias.Alias.register_module.html#arraylias.Alias.register_module">[docs]</a>    <span class="k">def</span> <span class="nf">register_module</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Alias.register_module">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.register_module.html#arraylias.Alias.register_module">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_module</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">module</span><span class="p">:</span> <span class="n">ModuleType</span><span class="p">,</span>
         <span class="n">lib</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -590,7 +609,10 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Alias.register_type"><a class="viewcode-back" href="../../stubs/arraylias.Alias.register_type.html#arraylias.Alias.register_type">[docs]</a>    <span class="k">def</span> <span class="nf">register_type</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Alias.register_type">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.register_type.html#arraylias.Alias.register_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">register_type</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">array_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
         <span class="n">lib</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -617,7 +639,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_types</span><span class="p">[</span><span class="n">array_type</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types</span><span class="p">[</span><span class="n">array_type</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">lib</span><span class="p">,)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Alias.infer_libs"><a class="viewcode-back" href="../../stubs/arraylias.Alias.infer_libs.html#arraylias.Alias.infer_libs">[docs]</a>    <span class="k">def</span> <span class="nf">infer_libs</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Alias.infer_libs">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.infer_libs.html#arraylias.Alias.infer_libs">[docs]</a>
+    <span class="k">def</span> <span class="nf">infer_libs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="nb">any</span><span class="p">],</span> <span class="n">allow_sequence</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Infer the registered library name for an object.</span>
@@ -647,12 +672,16 @@
 
         <span class="k">return</span> <span class="n">libs</span></div>
 
-<div class="viewcode-block" id="Alias.cache_clear"><a class="viewcode-back" href="../../stubs/arraylias.Alias.cache_clear.html#arraylias.Alias.cache_clear">[docs]</a>    <span class="k">def</span> <span class="nf">cache_clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Alias.cache_clear">
+<a class="viewcode-back" href="../../stubs/arraylias.Alias.cache_clear.html#arraylias.Alias.cache_clear">[docs]</a>
+    <span class="k">def</span> <span class="nf">cache_clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear cached dispatched calls.&quot;&quot;&quot;</span>
         <span class="c1"># Clear LRU cached functions</span>
         <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method_lru_cache</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">func</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_method_lru_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
 
     <span class="k">def</span> <span class="nf">_register_lib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lib</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Register an array library name.</span>
@@ -877,6 +906,7 @@
         <span class="k">return</span> <span class="n">path</span></div>
 
 
+
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">_lib_from_object</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="nb">any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Infer array library string from base module path of an object.&quot;&quot;&quot;</span>
@@ -917,7 +947,7 @@
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on 2024/01/15</div>
+              Last updated on 2024/02/20</div>
           </div>
           <div class="right-details">
             
@@ -934,9 +964,9 @@
   </div>
 </div><script src="../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=2389946f"></script>
+    <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
     <script src="../../_static/scripts/qiskit-sphinx-theme.js?v=4d77b8ca"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>

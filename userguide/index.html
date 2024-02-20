@@ -5,8 +5,8 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Arraylias (arraylias)" href="../apidocs/index.html" /><link rel="prev" title="Arraylias Documentation" href="../index.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.08.19 -->
-        <title>Arraylias User Guide - arraylias 0.1.0</title>
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.08.19 -->
+        <title>Arraylias User Guide - arraylias 0.1.1</title>
       <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=82a976d7" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/qiskit-sphinx-theme.css?v=fe84956c" />
@@ -200,7 +200,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">arraylias 0.1.0</div></a>
+      <a href="../index.html"><div class="brand">arraylias 0.1.1</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -227,7 +227,7 @@
     </div>
   </a>
   
-  <span class="sidebar-brand-text">arraylias 0.1.0</span>
+  <span class="sidebar-brand-text">arraylias 0.1.1</span>
 </div><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
@@ -299,8 +299,8 @@
           </label>
         </div>
         <article role="main">
-          <span class="target" id="module-arraylias_userguide"><span id="arraylias-userguide"></span></span><section id="arraylias-user-guide">
-<h1>Arraylias User Guide<a class="headerlink" href="#arraylias-user-guide" title="Permalink to this heading">#</a></h1>
+          <section id="arraylias-user-guide">
+<span id="module-arraylias_userguide"></span><span id="arraylias-userguide"></span><h1>Arraylias User Guide<a class="headerlink" href="#arraylias-user-guide" title="Link to this heading">#</a></h1>
 <p>The main class of the Arraylias package is the <a class="reference internal" href="../stubs/arraylias.Alias.html#arraylias.Alias" title="arraylias.Alias"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alias</span></code></a> class.
 This is used to build an aliased module structure for 1 or more
 libraries and write generic code that can automatically dispatch to
@@ -310,7 +310,7 @@ of the first argument of the called function.</p>
 extended by registering custom modules, and modules can be extended by
 registering custom functions.</p>
 <section id="default-numpy-and-scipy-aliases">
-<h2>Default NumPy and SciPy Aliases<a class="headerlink" href="#default-numpy-and-scipy-aliases" title="Permalink to this heading">#</a></h2>
+<h2>Default NumPy and SciPy Aliases<a class="headerlink" href="#default-numpy-and-scipy-aliases" title="Link to this heading">#</a></h2>
 <p>The simplest way to use Arraylias is to use the <a class="reference internal" href="../stubs/arraylias.numpy_alias.html#arraylias.numpy_alias" title="arraylias.numpy_alias"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy_alias()</span></code></a>
 and <a class="reference internal" href="../stubs/arraylias.scipy_alias.html#arraylias.scipy_alias" title="arraylias.scipy_alias"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy_alias()</span></code></a> functions to return a pre-configured
 <a class="reference internal" href="../stubs/arraylias.Alias.html#arraylias.Alias" title="arraylias.Alias"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alias</span></code></a> with NumPy module or SciPy module syntax respectively.</p>
@@ -328,12 +328,12 @@ in your code.</p>
 <a class="reference internal" href="#building"><span class="std std-ref">Building an Alias</span></a> section.</p>
 </section>
 <section id="using-an-alias">
-<span id="using"></span><h2>Using an Alias<a class="headerlink" href="#using-an-alias" title="Permalink to this heading">#</a></h2>
+<span id="using"></span><h2>Using an Alias<a class="headerlink" href="#using-an-alias" title="Link to this heading">#</a></h2>
 <p>Given a configured <a class="reference internal" href="../stubs/arraylias.Alias.html#arraylias.Alias" title="arraylias.Alias"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alias</span></code></a> instance, an alias to a given path
 is returned using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.__call__()</span></code> method. This will return an
 <a class="reference internal" href="../stubs/arraylias.AliasedPath.html#arraylias.AliasedPath" title="arraylias.AliasedPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">AliasedPath</span></code></a> or <a class="reference internal" href="../stubs/arraylias.AliasedModule.html#arraylias.AliasedModule" title="arraylias.AliasedModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">AliasedModule</span></code></a> to the specified path.</p>
 <section id="automatic-dispatching">
-<h3>Automatic dispatching<a class="headerlink" href="#automatic-dispatching" title="Permalink to this heading">#</a></h3>
+<h3>Automatic dispatching<a class="headerlink" href="#automatic-dispatching" title="Link to this heading">#</a></h3>
 <p>An <a class="reference internal" href="../stubs/arraylias.AliasedPath.html#arraylias.AliasedPath" title="arraylias.AliasedPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">AliasedPath</span></code></a> stores an unresolved path to a function.
 Whether this function exists in any libraries is not resolved until
 it is called. When called the type of the first argument will be used
@@ -360,7 +360,7 @@ traversed to submodules or functions using attribute based access such as:</p>
 </div>
 </section>
 <section id="dispatching-to-a-specific-library">
-<h3>Dispatching to a specific library<a class="headerlink" href="#dispatching-to-a-specific-library" title="Permalink to this heading">#</a></h3>
+<h3>Dispatching to a specific library<a class="headerlink" href="#dispatching-to-a-specific-library" title="Link to this heading">#</a></h3>
 <p>Dispatching to a specific library function or module can be done
 by specifying a path including the library, or using the <code class="docutils literal notranslate"><span class="pre">like</span></code>
 kwarg of the call method.</p>
@@ -386,9 +386,9 @@ for that library.</p>
 </section>
 </section>
 <section id="building-an-alias">
-<span id="building"></span><h2>Building an Alias<a class="headerlink" href="#building-an-alias" title="Permalink to this heading">#</a></h2>
+<span id="building"></span><h2>Building an Alias<a class="headerlink" href="#building-an-alias" title="Link to this heading">#</a></h2>
 <section id="registering-types">
-<h3>Registering Types<a class="headerlink" href="#registering-types" title="Permalink to this heading">#</a></h3>
+<h3>Registering Types<a class="headerlink" href="#registering-types" title="Link to this heading">#</a></h3>
 <p>Types are registered to a specific library for dispatching using the
 <a class="reference internal" href="../stubs/arraylias.Alias.register_type.html#arraylias.Alias.register_type" title="arraylias.Alias.register_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_type()</span></code></a> method. Registering a type a second time
 will override the previous library with the new library. Any subclasses
@@ -403,7 +403,7 @@ methods can be used to return aa tuple of  all registered types and
 libraries respectively.</p>
 </section>
 <section id="registering-modules">
-<h3>Registering Modules<a class="headerlink" href="#registering-modules" title="Permalink to this heading">#</a></h3>
+<h3>Registering Modules<a class="headerlink" href="#registering-modules" title="Link to this heading">#</a></h3>
 <p>The <a class="reference internal" href="../stubs/arraylias.Alias.register_module.html#arraylias.Alias.register_module" title="arraylias.Alias.register_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_module()</span></code></a> method can be used to register
 a module for dispatching aliased functions and modules for a library.
 By default modules are registered to the base path of that library if
@@ -424,7 +424,7 @@ There is a separate <a class="reference internal" href="../stubs/arraylias.scipy
 SciPy alias.</p>
 </section>
 <section id="registering-functions">
-<h3>Registering Functions<a class="headerlink" href="#registering-functions" title="Permalink to this heading">#</a></h3>
+<h3>Registering Functions<a class="headerlink" href="#registering-functions" title="Link to this heading">#</a></h3>
 <p>Individual functions are registered using the
 <a class="reference internal" href="../stubs/arraylias.Alias.register_function.html#arraylias.Alias.register_function" title="arraylias.Alias.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_function()</span></code></a> method.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">alias</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="n">some_function</span><span class="p">,</span> <span class="n">lib</span><span class="o">=</span><span class="s2">&quot;library&quot;</span><span class="p">)</span>
@@ -459,7 +459,7 @@ the library, they will still be traversable by the alias. Eg</p>
 used as the path.</p>
 </section>
 <section id="registering-fallback-functions">
-<h3>Registering Fallback Functions<a class="headerlink" href="#registering-fallback-functions" title="Permalink to this heading">#</a></h3>
+<h3>Registering Fallback Functions<a class="headerlink" href="#registering-fallback-functions" title="Link to this heading">#</a></h3>
 <p>The <a class="reference internal" href="../stubs/arraylias.Alias.register_fallback.html#arraylias.Alias.register_fallback" title="arraylias.Alias.register_fallback"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_fallback()</span></code></a> can be used to register a fallback
 function that will be invoked if a match to a specific function path
 cannot be found for the dispatched library. Like <a class="reference internal" href="../stubs/arraylias.Alias.register_function.html#arraylias.Alias.register_function" title="arraylias.Alias.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_function()</span></code></a>
@@ -470,7 +470,7 @@ also registering a specialized version of the function for a
 specific library using the <a class="reference internal" href="../stubs/arraylias.Alias.register_function.html#arraylias.Alias.register_function" title="arraylias.Alias.register_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_function()</span></code></a> method.</p>
 </section>
 <section id="registering-default-functions">
-<h3>Registering Default Functions<a class="headerlink" href="#registering-default-functions" title="Permalink to this heading">#</a></h3>
+<h3>Registering Default Functions<a class="headerlink" href="#registering-default-functions" title="Link to this heading">#</a></h3>
 <p>The <a class="reference internal" href="../stubs/arraylias.Alias.register_default.html#arraylias.Alias.register_default" title="arraylias.Alias.register_default"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Alias.register_default()</span></code></a> can be used to register a default function
 that will be invoked if the type of the first argument of a called
 <a class="reference internal" href="../stubs/arraylias.AliasedPath.html#arraylias.AliasedPath" title="arraylias.AliasedPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">AliasedPath</span></code></a> function does not match any registered library
@@ -537,7 +537,7 @@ functions:</p>
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on 2024/01/15</div>
+              Last updated on 2024/02/20</div>
           </div>
           <div class="right-details">
             
@@ -586,9 +586,9 @@ functions:</p>
   </div>
 </div><script src="../_static/jquery.js?v=5d32c60e"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2389946f"></script>
+    <script src="../_static/documentation_options.js?v=a58bc63e"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/qiskit-sphinx-theme.js?v=4d77b8ca"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
